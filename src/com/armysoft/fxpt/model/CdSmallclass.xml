@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CdSmallclassOpt">
+
+	<!-- 表列名 -->
+	<sql id="columns">	
+	ID,Categoriesdm,Casmallclassdm,Casmallclassmc</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from cd_smallclass
+		where 1 = 1
+		
+		
+   </sql>
+	<!-- 实体映射 -->
+	<resultMap id="cdSmallclassMap" type="CdSmallclass">
+				<result column="ID" property="id" />
+				<result column="Categoriesdm" property="categoriesdm" />
+				<result column="Casmallclassdm" property="casmallclassdm" /> 
+				<result column="Casmallclassmc" property="casmallclassmc" />
+			</resultMap>
+
+
+	<select id="getCdSmallclass" resultMap="cdSmallclassMap"  parameterType="String">
+		select * from cd_smallclass where Categoriesdm = #{cdCategoriesbh}
+			</select>		
+    <select id="findById" resultMap="cdSmallclassMap" parameterType="Long">
+		select * from cd_smallclass where id = #{id}
+	</select>
+	
+    <select id="sumCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		from  cd_smallclass
+		where 1 = 1	
+	</select>
+		
+	<select id="page" resultMap="cdSmallclassMap" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<!-- 保存 -->
+	<insert id="insert" parameterType="cdCategories">
+		insert into cd_smallclass(Categoriesdm,Casmallclassdm,Casmallclassmc)
+		values(#{categoriesdm} 		
+		, #{casmallclassdm} 
+		, #{casmallclassmc} 
+		  )
+		</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="cdCategories">
+	    update cd_smallclass set 
+		Categoriesdm=#{categoriesdm}
+		,Casmallclassdm=#{casmallclassdm}
+		,Casmallclassmc=#{casmallclassmc}
+		where ID = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Long">
+		delete from cd_smallclass where ID = #{ID}
+	</delete>
+	
+	<!-- ********************************************* -->
+
+</mapper>

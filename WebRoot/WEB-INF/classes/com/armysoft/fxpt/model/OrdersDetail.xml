@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrdersDetailOpt">
+
+	<!-- 表列名 -->
+	<sql id="columns">	a.ID,a.OrderId,a.ProductId ,a.Count ,a.Price ,a.UpdateTime,ci.Cdname</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from (select * from orders_detail where OrderId  = #{parm.orderId}) a left join cd_information ci on a.ProductId=ci.ID
+		
+		
+   </sql>
+   
+	<!-- 保存 -->
+	<insert id="batchInsert"  parameterType="java.util.List">
+	insert into orders_detail(OrderId,ProductId,Count,Price,UpdateTime)
+			values
+		<foreach collection="list" item="item" index="index" separator="," >  
+        	(#{item.orderId},#{item.Pid},#{item.Pnum},#{item.Cdprice},now())
+    	</foreach>  
+    	
+	
+		</insert>
+
+		<select id="page" resultType="java.util.Map" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+ <select id="findAllByOrderId" resultType="java.util.Map" parameterType="String">
+		select a.ID,a.OrderId,a.ProductId ,a.Count ,a.Price ,a.UpdateTime,ci.Cdname 
+		from (select * from orders_detail where OrderId  = #{orderId}) a left join cd_information ci on a.ProductId=ci.ID
+	</select>
+</mapper>

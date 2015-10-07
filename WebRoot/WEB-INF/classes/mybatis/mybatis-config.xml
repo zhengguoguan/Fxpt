@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration        
+    PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"        
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+	<setting name="lazyLoadingEnabled" value="true"/> 
+	<setting name="aggressiveLazyLoading" value="false"/> 
+</settings>
+  <!--  指定包下实体Bean起别名,默认类名作别名 -->
+     <typeAliases>
+        <package name="com.armysoft.fxpt.model"/>
+        <package name="org.armysoft.security.model"/>
+    </typeAliases>
+</configuration>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CdInformationOpt">
+	<!-- 表列名 -->
+	<sql id="columns">	
+	a.ID,a.Cdname,a.Cdprice,a.Cdcategories,a.Cdsmallclass,a.Cdintroduction,a.Shelfnumber,a.Stockr,a.Cdpicture,a.Cpbh,a.Cdpicturech,b.Name</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from cd_information a left join product_cate b on a.Cdcategories=b.ID
+		where 1 = 1
+			<if test="parm.fcpbh != null and parm.fcpbh != ''">
+		and cpbh  like CONCAT('%', #{parm.fcpbh}, '%')
+		</if>
+			<if test="parm.fcdname != null and parm.fcdname!= ''">
+		and cdname like CONCAT('%', #{parm.fcdname}, '%')
+		</if> 
+		<if test="parm.idStr != null and parm.idStr != ''">
+		and cdcategories = #{parm.idStr}
+		</if>
+			<if test="parm.key != null and parm.key!= ''">
+		and cdname like CONCAT('%', #{parm.key}, '%')
+		</if>
+		
+   </sql>
+	<!-- 实体映射 -->
+	<resultMap id="cdInformationMap" type="CdInformation">
+				<result column="ID" property="id" />
+				<result column="Cdname" property="cdname" />
+				<result column="Cdprice" property="cdprice" />
+				<result column="Cdcategories" property="cdcategories" />
+				<result column="Cdsmallclass" property="cdsmallclass" />
+				<result column="Cdintroduction" property="cdintroduction" />
+				<result column="Shelfnumber" property="shelfnumber" />
+				<result column="Stockr" property="stockr" />
+				<result column="Cdpicture" property="cdpicture" />
+				<result column="Cpbh" property="cpbh" />
+				<result column="Cdpicturech" property="cdpicturech" />
+			</resultMap>
+  	
+		
+	
+	
+	 <select id="getInformation" resultType="java.util.Map" parameterType="java.util.Map"> 
+       select 
+		ID,Cdname,Cdprice,Cdpicturech
+	    from  cd_information
+		where 1 = 1		
+		</select>	
+	
+    <select id="findById" resultMap="cdInformationMap" parameterType="Long">
+		select * from cd_information where id = #{id}
+	</select>
+	
+    <select id="sumCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		from  cd_information
+		where 1 = 1	
+	</select>
+		
+	<select id="page" resultMap="cdInformationMap" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<!-- 保存 -->
+	<insert id="insert" parameterType="cdInformation">
+		insert into cd_information(Cdname,Cdprice,Cdcategories,Cdsmallclass,Cdintroduction,Shelfnumber,Stockr,Cdpicture,Cpbh,Cdpicturech)
+		values(#{cdname} 		
+		, #{cdprice} 
+		, #{cdcategories} 
+		, #{cdsmallclass} 
+		, #{cdintroduction} 
+		, #{shelfnumber} 
+		, #{stockr} 
+		, #{cdpicture} 
+		, #{cpbh}
+		, #{cdpicturech}
+		  )
+		</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="cdInformation">
+	    update cd_information set 
+		 Cdname=#{cdname}
+		,Cdprice=#{cdprice}
+		,Cdcategories=#{cdcategories}
+		,Cdsmallclass=#{cdsmallclass}
+		,Cdintroduction=#{cdintroduction}
+		,Shelfnumber=#{shelfnumber}
+		,Stockr=#{stockr}
+		,Cdpicture=#{cdpicture}
+		,Cpbh=#{cpbh}
+		,Cdpicturech=#{cdpicturech}
+		where ID = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Long">
+		delete from cd_information where ID = #{ID}
+	</delete>
+	
+	<!-- ********************************************* -->
+
+</mapper>

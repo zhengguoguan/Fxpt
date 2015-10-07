@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CarsOpt">
+	<!-- 表列名 -->
+	<sql id="columns">	a.ID,a.Createdate,a.Pid ,a.Pnum,a.Openid</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from cars a 
+		where 1 = 1
+   </sql>
+	<!-- 实体映射 -->
+	<resultMap id="carsMap" type="Cars">
+				<result column="ID" property="id" />
+				<result column="Createdate" property="createdate" />
+				<result column="Pid" property="pid" />
+				<result column="Pnum" property="pnum" />
+				<result column="Openid" property="openid" />
+			</resultMap>
+  	
+		
+    <select id="findById" resultMap="carsMap" parameterType="Long">
+		select * from cars where id = #{id}
+	</select>
+	
+	 <select id="findByOpid" resultMap="carsMap" parameterType="java.util.Map">
+		select * from cars where 1=1
+		<if test="pid != null and pid != ''">
+		and Pid  = #{pid}
+		</if>
+			<if test="openid != null and openid!= ''">
+		and Openid  = #{openid}
+		</if>
+	</select>
+		
+		<select id="findByOd" resultMap="carsMap" parameterType="java.util.Map">
+		select * from cars  a left join cd_information b on a.pid = b.id where 1=1
+			<if test="openid != null and openid!= ''">
+		    and Openid  = #{openid}
+		    </if>
+			</select>
+			
+		<select id="findByOpenId" resultType="java.util.Map" parameterType="java.util.Map">
+		select a.*, b.Cdprice from cars  a , cd_information b where a.pid = b.id 
+			<if test="openid != null and openid!= ''">
+		    and a.Openid  = #{openid}
+		    </if>
+			</select>
+	
+    <select id="sumCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		from  cars
+		where 1 = 1	
+	</select>
+		
+	<select id="page" resultMap="carsMap" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<!-- 保存 -->
+	<insert id="insert" parameterType="cars">
+		insert into cars(Createdate,Pid,Pnum,Openid)
+		values(#{createdate} 		
+		, #{pid} 
+		, #{pnum} 
+		, #{openid} 
+		  )
+		</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="cars">
+	    update cars set 
+		 Createdate=#{createdate}
+		,Pid=#{pid}
+		,Pnum=#{pnum}
+		,Openid=#{openid}
+		where ID = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Long">
+		delete from cars  where ID = #{ID}
+	</delete>
+	<delete id="deleteByOpenId" parameterType="String">
+		delete from cars  where Openid = #{openId}
+	</delete>
+	<!-- ********************************************* -->
+
+</mapper>

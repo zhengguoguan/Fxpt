@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MbMemberOpt">
+
+	<!-- 表列名 -->
+	<sql id="columns">	
+	ID,Mbname,Openid,Mbtype,Wxname,Mid,Zw,Dz,Tel,Phone,Email</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from mb_member
+		where 1 = 1
+		<if test="parm.fmbname != null and parm.fmbname != ''">
+		and mbname  like CONCAT('%', #{parm.fmbname}, '%')
+		</if>
+			<if test="parm.fwxname != null and parm.fwxname!= ''">
+		and wxname like CONCAT('%', #{parm.fwxname}, '%')
+		</if>
+		
+		
+   </sql>
+	<!-- 实体映射 -->
+	<resultMap id="mbMemberMap" type="MbMember">
+				<result column="ID" property="id" />
+				<result column="Mbname" property="mbname" />
+				<result column="Openid" property="openid" />
+				<result column="Mbtype" property="mbtype" />
+				<result column="Wxname" property="wxname" />
+				<result column="Mid" property="mid" />
+				<result column="Zw" property="zw" />
+				<result column="Dz" property="dz" />
+				<result column="Tel" property="tel" />
+				<result column="Phone" property="phone" />
+				<result column="Email" property="email" />
+				
+			</resultMap>
+
+
+	
+    <select id="findById" resultMap="mbMemberMap" parameterType="Long">
+		select * from mb_member where id = #{id}
+	</select>
+	<select id="findByOpenid" resultMap="mbMemberMap" parameterType="String">
+		select * from mb_member where openid = #{openid}
+	</select>
+	
+    <select id="sumCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		from  mb_member
+		where 1 = 1	
+	</select>
+		
+    <select id="getMbMemberMap" resultMap="mbMemberMap">
+		select * from mb_member
+			</select>		
+		
+	<select id="page" resultMap="mbMemberMap" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<!-- 保存 -->
+	<insert id="insert" parameterType="mbMember">
+		insert into mb_member(Mbname,Openid,Mbtype,Wxname,Mid,Zw,Dz,Tel,Phone,Email)
+		values(#{mbname} 		
+		, #{openid} 
+		, #{mbtype} 
+		, #{wxname} 
+		, #{mid} 
+		, #{zw} 
+		, #{dz} 
+		, #{tel} 
+		, #{phone} 
+		, #{email} 
+		  )
+		</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="mbMember">
+	    update mb_member set 
+		Mbname=#{mbname}
+		,Openid=#{openid}
+		,Mbtype=#{mbtype}
+		,Wxname=#{wxname}
+		,Mid=#{mid}
+		,Zw=#{zw}
+		,Dz=#{dz}
+		,Tel=#{tel}
+		,Phone=#{phone}
+		,Email=#{email}
+		where ID = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Long">
+		delete from mb_member where ID = #{ID}
+	</delete>
+	
+	<!-- ********************************************* -->
+
+</mapper>

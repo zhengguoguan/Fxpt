@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AddressOpt">
+	<!-- 表列名 -->
+	<sql id="columns">	a.ID,a.Createdate,a.Lxrxm ,a.Lxrdh,a.Provno,a.Cityno,a.Xxdz,a.Openid,a.Check</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from address a 
+		where 1 = 1
+   </sql>
+	<!-- 实体映射 -->
+	<resultMap id="addressMap" type="Address">
+				<result column="ID" property="id" />
+				<result column="Createdate" property="createdate" />
+				<result column="Lxrxm" property="lxrxm" />
+				<result column="Lxrdh" property="lxrdh" />
+				<result column="Provno" property="provno" />
+				<result column="Cityno" property="cityno" />
+				<result column="Xxdz" property="xxdz" />
+				<result column="Openid" property="openid" />
+				<result column="Check" property="check" />
+			</resultMap>
+  	
+		
+    <select id="findById" resultMap="addressMap" parameterType="Long">
+		select * from address where id = #{id}
+	</select>
+	
+	<select id="findByOd" resultMap="addressMap" parameterType="java.util.Map">
+		select * from address   where 1=1
+			<if test="openid != null and openid!= ''">
+		    and Openid  = #{openid}
+		    </if>
+			</select>
+    
+	<select id="findByCheckOd" resultMap="addressMap" parameterType="String">
+		select * from address t  where  t.check='1' and t.openid  = #{openid} 
+	</select>
+	
+    <select id="sumCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		from  cars
+		where 1 = 1	
+	</select>
+		
+	<select id="page" resultMap="addressMap" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<!-- 保存 -->
+	<insert id="insert" parameterType="address">
+		insert into address(Createdate,Lxrxm,Lxrdh,Provno,Cityno,Xxdz,Openid)
+		values(#{createdate} 		
+		, #{lxrxm} 
+		, #{lxrdh} 
+		, #{provno} 
+		, #{cityno} 
+		, #{xxdz} 
+		, #{openid} 
+		  )
+		</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="address">
+	    update address set 
+		 Createdate=#{createdate}
+		,Lxrxm=#{lxrxm}
+		,Lxrdh=#{lxrdh}
+		,Provno=#{provno}
+		,Cityno=#{cityno}
+		,Xxdz=#{xxdz}
+		,Openid=#{openid}
+		where ID = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Long">
+		delete from address  where ID = #{ID}
+	</delete>
+	
+	<!-- ********************************************* -->
+
+</mapper>

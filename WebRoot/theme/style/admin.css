@@ -1,0 +1,284 @@
+@charset "utf-8";
+/* CSS Document */
+
+.admin_l_box {
+	padding: 8px;
+	background-color: #FFF;
+	margin: 5px;
+}
+.admin_l_box .btn_box {
+	overflow: hidden;
+	display: block;
+	padding-bottom: 10px;
+}
+.admin_l_box .btn_box span {
+	overflow: hidden;
+	display: block;
+	float: left;
+	padding-right: 10px;
+}
+.admin_l_box .btn_box span .buttonStyle {
+	overflow: hidden;
+	display: block;
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 2px;
+	cursor: pointer;
+	color: #333;
+	padding-top: 5px;
+	padding-right: 8px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+}
+.admin_l_box .btn_box span .button_hover {
+	overflow: hidden;
+	display: block;
+	background-color: #126de0;
+	border: 1px solid #126de0;
+	border-radius: 2px;
+	cursor: pointer;
+	color: #FFF;
+	padding-top: 5px;
+	padding-right: 8px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+}
+.admin_l_box .box_input {
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #dddddd;
+	overflow: hidden;
+}
+.admin_l_box .box_input .left {
+	float: left;
+	width: 75%;
+}
+.admin_l_box .box_input .right {
+	margin-left: 75%;
+}
+
+.admin_l_box .box_input .left .ul {
+	display: block;
+}
+.admin_l_box .box_input .left .ul .li_style {
+	padding-bottom: 3px;
+	overflow: hidden;
+}
+.admin_l_box .box_input .left .ul .li_style span {
+	float: left;
+	width: 48%;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	padding-right: 5px;
+}
+.admin_l_box .box_input .left .ul .li_style span em {
+	float: left;
+	text-align: right;
+	width: 90px;
+}
+.box_input .left .ul .li_style span label .input_k {
+	padding: 3px;
+	border: 1px solid #cccccc;
+	width: 90%;
+	border-radius: 2px;
+}
+.box_input .left .ul .li_style span label .input_k2 {
+	padding: 3px;
+	border: 1px solid #cccccc;
+	width: 90%;
+	border-radius: 2px;
+}
+.box_input .left .ul .li_style span label .input_k3 {
+	padding: 3px;
+	border: 1px solid #cccccc;
+	width: 40%;
+	border-radius: 2px;
+}
+.box_input .left .ul .li_style span label .input_k:hover {
+	padding: 3px;
+	border: 1px solid #126de0;
+	width: 90%;
+	border-radius: 2px;
+}
+.box_input .left .ul .li_style span label .input_k2:hover {
+	padding: 3px;
+	border: 1px solid #126de0;
+	width: 90%;
+	border-radius: 2px;
+}
+.box_input .left .ul .li_style span label .input_k3:hover {
+	padding: 3px;
+	border: 1px solid #126de0;
+	width: 40%;
+	border-radius: 2px;
+}
+.box_input .left .ul .li_style span label  {
+	margin-left: 90px;
+	display: block;
+	line-height: 30px;
+	height: 30px;
+}
+.box_input .left .ul .li_style span label .select {
+	padding: 3px;
+	border: 1px solid #cccccc;
+	width: 90%;
+	border-radius: 2px;
+	display: block;
+}
+.box_input .left .ul .li_style span label .select2 {
+	padding: 3px;
+	border: 1px solid #cccccc;
+	width: 30.5%;
+	border-radius: 2px;
+	display: block;
+	float: left;
+	margin-right: 1%;
+}
+.box_input .right span{
+	display: block;
+	padding-bottom: 10px;
+}
+.admin_l_box .right span label {
+	display: block;
+	text-align: left;
+}
+.admin_l_box .right span label .button {
+	background-color: #f8f8f8;
+	padding: 5px;
+	border: 1px solid #CCC;
+	border-radius: 2px;
+	cursor: pointer;
+}
+.admin_l_box .right span label .button:hover {
+	background-color: #126DE0;
+	padding: 5px;
+	border: 1px solid #126DE0;
+	border-radius: 2px;
+	color: #FFF;
+	cursor: pointer;
+}
+
+
+.box_input .right span textarea {
+	border: 1px solid #CCC;
+	width: 90%;
+	padding: 5px;
+	border-radius: 2px;
+	height: 100px;
+}
+.box_input .right span textarea:hover {
+	border: 1px solid #126DE0;
+	width: 90%;
+	padding: 5px;
+	border-radius: 2px;
+}
+.admin_l_box .div_table {
+	display: block;
+	padding-bottom: 10px;
+}
+
+.table {
+    background: #FFF;
+    font-size: 12px;
+    border-top: 1px solid #e1e6eb;
+    margin-top: 8px;
+    border: 1px solid #e1e6eb;
+}
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.table thead tr th {
+	padding: 5px;
+	font-weight: normal;
+	color: #666;
+	border-bottom: 1px solid #e1e6eb;
+	background-color: #F5F6FA;
+	line-height: 30px;
+	height: 30px;
+}
+.table tbody tr td {
+    padding: 12px 8px;
+    border-top: 0px;
+    border-bottom: 1px solid #e1e6eb;
+    vertical-align: middle;
+	color: #333;
+}
+tfoot {
+	background-color: #f5f6fa;
+	width: 100%;
+}
+.table tfoot tr td {
+	border-bottom: 1px solid #e1e6eb;
+	vertical-align: middle;
+	padding-top: 12px;
+	padding-right: 8px;
+	padding-bottom: 12px;
+	padding-left: 8px;
+}
+.pull-right{
+	color: #666;
+	line-height: 30px;
+}
+.page {
+	PADDING-RIGHT: 27px;
+	PADDING-LEFT: 3px;
+	TEXT-ALIGN: right
+}
+.page A {
+	COLOR: #126DE0;
+	TEXT-DECORATION: none;
+	padding: 5px;
+	background-color: #FFF;
+	border: 1px solid #ddd;
+}
+.page A:hover {
+	COLOR: #FFF;
+	background-color: #126de0;
+	border: 1px solid #126de0;
+}
+.page A:active {
+	COLOR: #FFF;
+	border: 1px solid #126de0;
+}
+.page .current {
+	COLOR: #fff;
+	BACKGROUND-COLOR: #126de0;
+	padding: 5px;
+	border: 1px solid #126de0;
+}
+.page .disabled {
+	BORDER-RIGHT: #eee 1px solid;
+	BORDER-TOP: #eee 1px solid;
+	BORDER-LEFT: #eee 1px solid;
+	COLOR: #ddd;
+	BORDER-BOTTOM: #eee 1px solid;
+	padding: 5px;
+}
+.page .input_k {
+	padding: 4px;
+	width: 30px;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #CCC;
+	border-bottom-color: #CCC;
+	border-left-color: #CCC;
+}
+.page .btn_k {
+	height: 26px;
+	border: 1px solid #126DE0;
+	background-color: #126DE0;
+	color: #FFFFFF;
+	text-align: center;
+	cursor: pointer;
+}
+.page .float_go  {
+	position: absolute;
+	top: 2px;
+	right: 0px;
+}

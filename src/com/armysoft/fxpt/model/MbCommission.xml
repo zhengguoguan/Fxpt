@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MbCommissionOpt">
+
+	<!-- 表列名 -->
+	<sql id="columns">	
+	ID,Mbtype,Commission</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from mb_commission
+		where 1 = 1
+		
+		
+   </sql>
+	<!-- 实体映射 -->
+	<resultMap id="mbCommissionMap" type="MbCommission">
+				<result column="ID" property="id" />
+				<result column="Mbtype" property="mbtype" />
+				<result column="Commission" property="commission" />
+			</resultMap>
+
+
+	
+    <select id="findById" resultMap="mbCommissionMap" parameterType="Long">
+		select * from mb_commission where id = #{id}
+	</select>
+	
+    <select id="sumCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		from  mb_commission
+		where 1 = 1	
+	</select>
+		
+    <select id="getmbCommission" resultMap="mbCommissionMap">
+		select * from mb_commission
+			</select>		
+		
+	<select id="page" resultMap="mbCommissionMap" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<!-- 保存 -->
+	<insert id="insert" parameterType="cdCategories">
+		insert into  mb_commission(Mbtype,Commission)
+		values(#{mbtype} 		
+		, #{commission} 
+		  )
+		</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="cdCategories">
+	    update mb_commission set 
+		Mbtype=#{mbtype}
+		,Commission=#{commission}
+		where ID = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Long">
+		delete from mb_commission where ID = #{ID}
+	</delete>
+	
+	<!-- ********************************************* -->
+
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductCateOpt">
+	<!-- 表列名 -->
+	<sql id="columns">	
+	ID,Createdate,Deleted,Version,Fatherid,Name</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from product_cate
+		where 1 = 1
+		</sql>
+	<!-- 实体映射 -->
+	<resultMap id="productCateMap" type="ProductCate">
+				<result column="ID" property="id" />
+				<result column="Createdate" property="createdate" />
+				<result column="Deleted" property="deleted" />
+				<result column="Version" property="version" />
+				<result column="Fatherid" property="fatherid" />
+				<result column="Name" property="name" />
+			</resultMap>
+
+		
+    <select id="findById" resultMap="productCateMap" parameterType="Long">
+		select * from product_cate where id = #{id}
+	</select>
+	
+	 <select id="getProductCate" resultMap="productCateMap">
+		select * from product_cate
+			</select>	
+			
+	<select id="listByFatherId" resultMap="productCateMap" parameterType="Long">
+		select * from product_cate where Fatherid = #{id}
+			</select>				
+			
+    <select id="sumCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		from  product_cate
+		where 1 = 1	
+	</select>
+		
+	<select id="page" resultMap="productCateMap" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<!-- 保存 -->
+	<insert id="insert" parameterType="productCate">
+		insert into product_cate(Createdate,Deleted,Version,Fatherid,Name)
+		values(#{createdate} 		
+		, #{deleted} 
+		, #{version} 
+		, #{fatherid} 
+		, #{name} 
+		  )
+		</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="productCate">
+	    update product_cate set 
+		 Createdate=#{createdate}
+		,Deleted=#{deleted}
+		,Version=#{version}
+		,Fatherid=#{fatherid}
+		,Name=#{name}
+		where id = #{id}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Long">
+		delete from product_cate where ID = #{ID}
+	</delete>
+	
+	<!-- ********************************************* -->
+
+</mapper>
