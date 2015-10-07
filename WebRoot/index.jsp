@@ -4,14 +4,14 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, minimum-scale=1,initial-scale=1, maximum-scale=1, user-scalable=1;" id="viewport" name="viewport" />
-<title>芸祥文具</title>
+<title>芸祥文具 </title>
 <link href="${ctx}/theme/style/index.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/theme/style/master.css" rel="stylesheet" type="text/css">
 <script src='${ctx}/theme/js/hhSwipe.js' type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/js/jquery-1.8.3.js"></script>
 
 <script>
-		var page = 1;
+		var page = 1; 
 </script>
 <script>
 $(function(){
