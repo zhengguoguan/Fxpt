@@ -137,6 +137,7 @@ var banner = Swipe(document.getElementById('mySwipe'), {
    </div>
    <ul class="love-list"  id="productsList">
     
+    
    </ul>
     <div class="love-loading"><a href="${ctx }/portal/order/list/1.html?tag=0"  >模拟查看历史订单</a></div>
     <div class="love-loading"><a href="${ctx }/portal/order/orderTest.html"  >模拟点击支付</a></div>
