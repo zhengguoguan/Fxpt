@@ -212,10 +212,10 @@ chstrs=chpicture.split(",");
 for (i=0;i<strs.length ;i++ ) 
 { 
 if(chstrs[i]!=""){
-$file = $("<input type='text' name='oldfiles'  value='"+chstrs[i]+"'/>"); 
+$file = $("<input type='text' name='oldchfiles'  value='"+strs[i]+"'/>"); 
 if(i<chstrs.length)
 {
-$file1 = $("<input type='hidden' name='oldchfiles'  value='"+strs[i]+"'/>"); 
+$file1 = $("<input type='hidden' name='oldfiles'  value='"+strs[i]+"'/>"); 
 $button = $("<input type='button' value='delete'>");      
 $br = $("<br />");  
 $(":input[type=button][value=more]").after($file).after($file1).after($button).after($br); 

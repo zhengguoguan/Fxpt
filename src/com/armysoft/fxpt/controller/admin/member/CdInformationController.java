@@ -169,6 +169,9 @@ public class  CdInformationController extends BaseController {
 		} 
 		return null;
 	}
+    
+    
+   
     @RequestMapping(value = "/detail.html")
 	public  String detail(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
     	String idStr =request.getParameter("id");
@@ -193,6 +196,17 @@ public class  CdInformationController extends BaseController {
     	return "index/index";
 	}
     
+    @RequestMapping(value = "/List.html")
+	public  String List(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+    	
+    	String pid=request.getParameter("Pid");
+    	ProductCate pc=pcservice.findByKey(Long.valueOf(pid));
+    	if(pc!=null){
+    		request.setAttribute("pcname", pc.getName());
+    	}
+    	request.setAttribute("pid", pid);
+    	return "index/list";
+	}
     
     @RequestMapping(value = "/inputExport.html")
 	public String  OutPtqfqk(@RequestParam MultipartFile exlFile, HttpServletRequest request,HttpServletResponse response) throws ParseException, IOException {
@@ -333,8 +347,15 @@ public class  CdInformationController extends BaseController {
 			map.put("cdpicture",  cdpicture[i]);
 			list.add(map);
 			}
+			if(mb.getCdcategories()!=null && mb.getCdcategories()!=""){
 			ProductCate productCate= pcservice.findByKey(Long.valueOf(mb.getCdcategories()));
-			model.addAttribute("fatherName", productCate.getName());
+			
+			if(productCate==null){
+				model.addAttribute("fatherName", "顶级分类");
+			}else{
+				model.addAttribute("fatherName", productCate.getName());
+			}
+			}
 			model.addAttribute("cdpicture", list);
 			}
 		}else{
@@ -415,7 +436,7 @@ public class  CdInformationController extends BaseController {
 				entity.setCdpicture(FmPicture.substring(0,FmPicture.length()-1));
 			}
 			if(ChPicture !=""){
-				entity.setCdpicturech(ChPicture.substring(0,ChPicture.length()-1));
+		        entity.setCdpicturech(ChPicture.substring(0,ChPicture.length()-1));
 			}
 		}
 		service.update(entity);
