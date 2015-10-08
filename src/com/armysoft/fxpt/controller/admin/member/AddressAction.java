@@ -107,13 +107,38 @@ public class  AddressAction extends BaseController {
 		public  String listAddress(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		    HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	 //	String openid="";
-	  		String openid=snsUserInfo.getOpenId();
+	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    	//String openid=snsUserInfo.getOpenId();
 	   	    List list=addressService.findByOd(openid);
 	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
 	    	request.setAttribute("listaddress", addressService.findByOd(openid));
 	    	return "index/listAddress";
 		}
+	 
+	 @RequestMapping(value = "/changeAddress.html")
+		public String changeAddress(String id,String checkvalue,HttpServletRequest request,HttpServletResponse response) throws ParseException {
+	    	JSONObject jsonObject = new JSONObject();
+	    	
+	    	String[] checks=checkvalue.split(",");
+	    	String[] ids=id.split(",");
+	    	
+	    	for(int i=0;i<ids.length;i++){
+	    		Address ads=addressService.findByKey(Long.valueOf(ids[i]));
+	    		ads.setSeltype(checks[i]);
+	    		addressService.update(ads);
+	    	}
+	    	
+	    	
+	    	HttpSession session = request.getSession();
+	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
+	    	//String openid="";
+	    		String openid=snsUserInfo.getOpenId();
+	   	    List list=addressService.findByOd(openid);
+	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
+	    	request.setAttribute("listaddress", addressService.findByOd(openid));
+	    	return "index/listAddress";
+		}
+	 
 	 
 	 @RequestMapping(value = SAVE)
 		public String save(Address entity, Model model, HttpServletRequest request) throws IllegalStateException, IOException {
@@ -126,7 +151,7 @@ public class  AddressAction extends BaseController {
 		    	String openid=snsUserInfo.getOpenId();
 		    	List list=addressService.findByOd(openid);
 		    	if(list==null){
-		    		entity.setCheck("1");
+		    		entity.setSeltype("1");
 		    		
 		    	}
 		    	entity.setOpenid(openid);
@@ -134,6 +159,13 @@ public class  AddressAction extends BaseController {
 			} else {
 				addressService.update(entity);
 			}
-			return "index/addAddress";
+			HttpSession session = request.getSession();
+	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
+	    		String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    		// String openid=snsUserInfo.getOpenId();
+	    	
+	    	request.setAttribute("listcars", service.findByOd(openid));
+	    	request.setAttribute("adds", addressService.findByOd(openid));
+	    	return "index/toorders";
 		}
 }

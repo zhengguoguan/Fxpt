@@ -5,7 +5,7 @@
 
 <mapper namespace="AddressOpt">
 	<!-- 表列名 -->
-	<sql id="columns">	a.ID,a.Createdate,a.Lxrxm ,a.Lxrdh,a.Provno,a.Cityno,a.Xxdz,a.Openid,a.Check</sql>
+	<sql id="columns">	a.ID,a.Createdate,a.Lxrxm ,a.Lxrdh,a.Provno,a.Cityno,a.Xxdz,a.Openid,a.Seltype</sql>
 	<!-- 通用条件sql语句 -->
 	<sql id="condition" >
 		from address a 
@@ -21,7 +21,7 @@
 				<result column="Cityno" property="cityno" />
 				<result column="Xxdz" property="xxdz" />
 				<result column="Openid" property="openid" />
-				<result column="Check" property="check" />
+				<result column="Seltype" property="seltype" />
 			</resultMap>
   	
 		
@@ -37,7 +37,7 @@
 			</select>
     
 	<select id="findByCheckOd" resultMap="addressMap" parameterType="String">
-		select * from address t  where  t.check='1' and t.openid  = #{openid} 
+		select * from address t  where  t.seltype='1' and t.openid  = #{openid} 
 	</select>
 	
     <select id="sumCount" resultType="int" parameterType="java.util.Map">
@@ -58,7 +58,7 @@
 	</select>
 	<!-- 保存 -->
 	<insert id="insert" parameterType="address">
-		insert into address(Createdate,Lxrxm,Lxrdh,Provno,Cityno,Xxdz,Openid)
+		insert into address(Createdate,Lxrxm,Lxrdh,Provno,Cityno,Xxdz,Openid,Seltype)
 		values(#{createdate} 		
 		, #{lxrxm} 
 		, #{lxrdh} 
@@ -66,6 +66,7 @@
 		, #{cityno} 
 		, #{xxdz} 
 		, #{openid} 
+		, #{seltype} 
 		  )
 		</insert>
 
@@ -79,6 +80,7 @@
 		,Cityno=#{cityno}
 		,Xxdz=#{xxdz}
 		,Openid=#{openid}
+		,Seltype=#{seltype}
 		where ID = #{id}
 	</update>
 

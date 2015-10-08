@@ -120,7 +120,7 @@ public class  OrderController extends BaseController {
 		@RequestMapping(value = "/changeCars.html")
 		public String changeCars(String id,String num,HttpServletRequest request,HttpServletResponse response) throws ParseException {
 	    	JSONObject jsonObject = new JSONObject();
-	    	
+	    	if(id!="" || id!=null){
 	    	String[] ids=id.split(",");
 	    	String[] nums=num.split(",");
 	    	
@@ -129,11 +129,11 @@ public class  OrderController extends BaseController {
 	    		car.setPnum(Integer.valueOf(nums[i]));
 	    		carsService.update(car);
 	    	}
-	    	
+	    	}
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	//String openid="okETVtxhhU46yChDM4jM-xSCws08";
-	    	 	String openid=snsUserInfo.getOpenId();
+	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    	//	String openid=snsUserInfo.getOpenId();
 	    	  Address ads=  arService.findByCheckOd(openid);
 	    	request.setAttribute("listcars", carsService.findByOd(openid));
 	    	request.setAttribute("adds", arService.findByCheckOd(openid));
@@ -143,8 +143,8 @@ public class  OrderController extends BaseController {
 			public  String listCars(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		    	HttpSession session = request.getSession();
 		    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-		    //		String openid="";
-		  	    String openid=snsUserInfo.getOpenId();
+		    		String openid="";
+		    		//   String openid=snsUserInfo.getOpenId();
 		   	    List list=carsService.findByOd(openid);
 		   	    request.setAttribute("listsize", carsService.findByOd(openid).size());
 		    	request.setAttribute("listcars", carsService.findByOd(openid));
@@ -155,8 +155,8 @@ public class  OrderController extends BaseController {
 			  carsService.delete(id);
 				HttpSession session = request.getSession();
 		    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-		    	//String openid="";
-		    	 	 String openid=snsUserInfo.getOpenId();
+		    	String openid="";
+		    	//	 String openid=snsUserInfo.getOpenId();
 		    	 request.setAttribute("listsize", carsService.findByOd(openid).size());
 		    	request.setAttribute("listcars", carsService.findByOd(openid));
 				return "portal/listcars";

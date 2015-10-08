@@ -59,12 +59,13 @@ public class Address implements java.io.Serializable {
     private String cityno;
     private String xxdz;
     private String openid;
-    private String check;
-	public String getCheck() {
-		return check;
+    private String seltype;
+	public String getSeltype() {
+		return seltype;
 	}
-	public void setCheck(String check) {
-		this.check = check;
+	public void setSeltype(String seltype) {
+		this.seltype = seltype;
 	}
+	
     
 }
