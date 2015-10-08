@@ -51,7 +51,18 @@ $(document).ready(function(){
   $('#toOrder').on('click', function(){
                var listsize="${listsize}";
                if(listsize>0){
-               document.forms[0].action="${ctx}/portal/order/changeCars.html";
+                   //去结算前先选择支付方式 
+                    new $.flavr({ content : '选择支付方式 ',
+                            buttons : { success : { text: '微信支付', style: 'success', action:
+                            function(){ 
+                    	toPayFor(0);
+                             } }, 
+                            danger : { text: '货到付款', style: 'danger',
+                            action: function(){ 
+                            	 toPayFor(1); 
+                            } } } });
+                    
+               
                }else{
                document.forms[0].action="${ctx}/portal/order/listCars.html";
                }
@@ -61,6 +72,11 @@ $(document).ready(function(){
    
   
 });
+function toPayFor(payTypeValue){
+	$("#payType")val(payTypeValue);
+	document.forms[0].action="${ctx}/portal/order/changeCars.html";
+	document.forms[0].submit();
+}
 function setTotal(){ 
     var s=0; 
     $(".cart_items").each(function(){ 
@@ -106,6 +122,7 @@ function delConfirm(id){
     <div class="title"><a href="#">${mb.cdname}</a></div>
     <div class="member">
   <input type="hidden" id="id" name="id" value="${mb.id}"/>
+    <input type="hidden" id="payType" name="payType" value="0"/>
   <input id="min" name="" type="button" value="" class="min" />  
   <input id="text_box" name="num" type="text" value="${mb.pnum}" class="min_text_box"  />  
   <input id="add" name="" type="button" value="" class="add" /></div>

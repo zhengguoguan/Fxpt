@@ -22,13 +22,13 @@ public class Orders implements java.io.Serializable {
 	private Integer tag;
 	private Integer price; //单位分
 	private String randCode;//随机码
-	
+	private Integer payType;
 	public Orders(){
 		
 	}
 
 	public Orders(String orderId, String openId, String realName,
-			String address, String tel, Integer tag,Integer price, String randCode) {
+			String address, String tel, Integer tag,Integer price, String randCode,Integer payType) {
 		super();
 		this.orderId = orderId;
 		this.openId = openId;
@@ -37,9 +37,21 @@ public class Orders implements java.io.Serializable {
 		this.tel = tel;
 		this.tag = tag;
 		this.price=price;
+		this.payType=payType;
 		this.randCode = randCode;
 	}
-
+	public Orders(String orderId, String openId, String realName,
+			String address, String tel,Integer price,Integer payType) {
+		super();
+		this.orderId = orderId;
+		this.openId = openId;
+		this.realName = realName;
+		this.address = address;
+		this.tel = tel;
+		this.payType=payType;
+		this.price=price;
+		
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -128,6 +140,14 @@ public class Orders implements java.io.Serializable {
 	}
 	public void setRandCode(String randCode) {
 		this.randCode = randCode;
+	}
+
+	public Integer getPayType() {
+		return payType;
+	}
+
+	public void setPayType(Integer payType) {
+		this.payType = payType;
 	}
 	
 	

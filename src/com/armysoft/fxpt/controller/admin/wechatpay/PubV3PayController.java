@@ -83,13 +83,42 @@ public class  PubV3PayController extends BaseController {
 	        }
 		
 	}
-
+	
+	@RequestMapping(value = "/payOffsuccess.html")
+	public String payOffsuccess(HttpServletRequest request,HttpServletResponse response)   {
+		
+		
+		 return "/portal/PaySuccess";
+	}
 	@RequestMapping(value = "/paysuccess.html")
 	public String paysuccess(HttpServletRequest request,HttpServletResponse response,String out_trade_no,String randCode)   {
 		//更改订单状态为已支付
 		ordersService.updateByOrderId(out_trade_no,randCode);
 		
 		 return "/portal/PaySuccess";
+	}
+	
+	@RequestMapping(value = "/payOffExecute.html")
+	@ResponseBody()
+	public String payOffExecute(HttpServletRequest request,HttpServletResponse response,Integer totalPrice)  {
+		try{	
+			 HttpSession session = request.getSession();
+			 SNSUserInfo sui=(SNSUserInfo)session.getAttribute("snsUserInfo");
+			 SimpleDateFormat sFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+			String out_trade_no= sFormat.format(new Date());
+			  //插入订单记录与订单细目记录
+		      Address address=addressService.findByCheckOd(sui.getOpenId());
+		      
+		      Orders order=new Orders(out_trade_no, sui.getOpenId(),address.getLxrxm(),address.getProvno()+address.getCityno()+address.getXxdz(),address.getLxrdh(),totalPrice,1);
+		    
+		    
+		      List<Map<String, Object>> cars= carsService.findByOpenId(sui.getOpenId());
+		      ordersDetailService.batchInsert(cars, order);     //订单记录与订单细目记录事务提交,同时删除相应的购物车记录
+			return "success";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "";
+		}
 	}
 	
 	@RequestMapping(value = "/payExecute.html")
@@ -164,7 +193,7 @@ public class  PubV3PayController extends BaseController {
 	     //插入订单记录与订单细目记录
 	      Address address=addressService.findByCheckOd(sui.getOpenId());
 	      String randCode=String.valueOf(Math.random());
-	      Orders order=new Orders(parameters.get("out_trade_no").toString(), sui.getOpenId(),address.getLxrxm(),address.getProvno()+address.getCityno()+address.getXxdz(),address.getLxrdh(),0,totalPrice,randCode);
+	      Orders order=new Orders(parameters.get("out_trade_no").toString(), sui.getOpenId(),address.getLxrxm(),address.getProvno()+address.getCityno()+address.getXxdz(),address.getLxrdh(),0,totalPrice,randCode,0);
 	    
 	    
 	      List<Map<String, Object>> cars= carsService.findByOpenId(sui.getOpenId());
@@ -327,7 +356,7 @@ public class  PubV3PayController extends BaseController {
 	     //插入订单记录与订单细目记录
 	      Address address=addressService.findByCheckOd(sui.getOpenId());
 	      String randCode=String.valueOf(Math.random());
-	      Orders order=new Orders(parameters.get("out_trade_no").toString(), sui.getOpenId(),address.getLxrxm(),address.getProvno()+address.getCityno()+address.getXxdz(),address.getLxrdh(),0,totalPrice,randCode);
+	      Orders order=new Orders(parameters.get("out_trade_no").toString(), sui.getOpenId(),address.getLxrxm(),address.getProvno()+address.getCityno()+address.getXxdz(),address.getLxrdh(),0,totalPrice,randCode,0);
 	    
 	    
 	      List<Map<String, Object>> cars= carsService.findByOpenId(sui.getOpenId());

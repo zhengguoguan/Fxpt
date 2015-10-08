@@ -30,6 +30,31 @@ function setTotal(){
 <script type="text/javascript">  
   
    function loadPay(){
+	 
+	   //设置按钮失效，避免重复提交
+	   $("#toPayId").attr("onclick","");
+	 //如果是货到付款，不用调用微信支付 
+	 var payType="${payType}";
+	 if(payType=="1"){
+			$.ajax({
+	            url:"${ctx}/portal/pubv3pay/payOffExecute.html?random=" + Math.random(),            //<span style="font-family:微软雅黑;">ajax调用微信统一接口获取prepayId</span>  
+				data: 'totalPrice='+1,
+		  		type:'post',
+		  		dataType:'text',
+		  		async:false,
+		  		success:function(data){
+			  		if(data=="success"){
+			  			 window.location.href="${ctx}/portal/pubv3pay/payOffsuccess.html";  
+				  		}
+		  		},
+		  		error:function(){
+			  		alert("支付失败");
+		  			 window.location.href="http://www.baidu.com";     
+		  		} 
+		  		
+		  	});
+		 return;
+		 }
 	   var tp=parseInt(totalPrice)*100;alert(tp);
 		$.ajax({
             url:"${ctx}/portal/pubv3pay/payExecute.html?random=" + Math.random(),            //<span style="font-family:微软雅黑;">ajax调用微信统一接口获取prepayId</span>  
@@ -164,7 +189,7 @@ function setTotal(){
 <div class="bottom-fxied">
  <div class="payment-total-bar">
   <div class="ottom-total-price">总额：<font color="#FF0000">¥:<label id="total"></label></font></div>
-  <span><a data-href="#" onclick="loadPay()">去结算（1）</a></span></div></div>
+  <span><a data-href="#" onclick="loadPay()" id="toPayId">去结算（1）</a></span></div></div>
   </c:if>
 </body>
 </html>
