@@ -106,10 +106,10 @@ public class  OrderController extends BaseController {
 		public  String orderSure(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	 	 String openid=snsUserInfo.getOpenId();
-	    	
+	    	 	// String openid=snsUserInfo.getOpenId();
+	    	String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
 	    	request.setAttribute("listcars", carsService.findByOd(openid));
-	    	request.setAttribute("adds", carsService.findByOd(openid));
+	    	request.setAttribute("adds", arService.findByCheckOd(openid));
 	    	
 	    	return "portal/OrderSure";
 		}
@@ -133,7 +133,7 @@ public class  OrderController extends BaseController {
 	    	}
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    	String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
 	    	//	String openid=snsUserInfo.getOpenId();
 	    	  Address ads=  arService.findByCheckOd(openid);
 	    	request.setAttribute("listcars", carsService.findByOd(openid));

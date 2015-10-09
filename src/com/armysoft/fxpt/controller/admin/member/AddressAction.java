@@ -87,7 +87,6 @@ public class  AddressAction extends BaseController {
 	private AddressService addressService;
 	@Resource
 	private CarsService service;
-	
 	@Resource
 	private CdInformationService cdService;
 	
@@ -133,11 +132,11 @@ public class  AddressAction extends BaseController {
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
 	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
-	    	//	String openid=snsUserInfo.getOpenId();
-	    	  Address ads=  addressService.findByCheckOd(openid);
-	    	request.setAttribute("listcars", service.findByOd(openid));
-	    	request.setAttribute("adds", addressService.findByCheckOd(openid));
-	    	return "portal/OrderSure";
+	    	//String openid=snsUserInfo.getOpenId();
+	   	    List list=addressService.findByOd(openid);
+	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
+	    	request.setAttribute("listaddress", addressService.findByOd(openid));
+	    	return "index/listAddress";
 		}
 	 
 	 

@@ -148,7 +148,7 @@ var banner = Swipe(document.getElementById('mySwipe'), {
    </div> 
   </div>
 </div>
-<div class="bottom-fxied"><div class="de_cart" ><span id="a1"><a data-href="#" class="a1" >加入购物车</a></span><span id="a1"><a data-href="#" id="car" class="a2" >购物车</a></span></div></div>
+<div class="bottom-fxied"><div class="de_cart" ><span id="a1"><a data-href="#" class="a1" >加入购物车</a></span><span id="a1"><a data-href="#" id="car" class="a1" >购物车</a></span></div></div>
 </form>
 </body>
 
