@@ -54,6 +54,7 @@
 	                       <value>/admin/cars/toOrders</value>
 	                       <value>/admin/cars/changeCars</value>
 	                       <value>/admin/address/save</value>
+	                        <value>/admin/address/changeAddress</value>
 	                    
 	                  </list>
 	               </property>

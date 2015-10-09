@@ -48,35 +48,17 @@ $(document).ready(function(){
 	setTotal(); 
   }) 
    
-  $('#toOrder').on('click', function(){
+   $('#toOrder').on('click', function(){
                var listsize="${listsize}";
                if(listsize>0){
-                   //去结算前先选择支付方式 
-                    new $.flavr({ content : '选择支付方式 ',
-                            buttons : { success : { text: '微信支付', style: 'success', action:
-                            function(){ 
-                    	toPayFor(0);
-                             } }, 
-                            danger : { text: '货到付款', style: 'danger',
-                            action: function(){ 
-                            	 toPayFor(1); 
-                            } } } });
-                    
-               
+               document.forms[0].action="${ctx}/portal/order/changeCars.html";
                }else{
                document.forms[0].action="${ctx}/portal/order/listCars.html";
                }
                document.forms[0].submit();
               });
-
-   
   
 });
-function toPayFor(payTypeValue){
-	$("#payType")val(payTypeValue);
-	document.forms[0].action="${ctx}/portal/order/changeCars.html";
-	document.forms[0].submit();
-}
 function setTotal(){ 
     var s=0; 
     $(".cart_items").each(function(){ 
@@ -100,20 +82,25 @@ function delConfirm(id){
                             action: function(){ this.exit(); } } } });
 	}
 	
-	
+	function toPayFor(payTypeValue){
+	$("#payType").val(payTypeValue);
+	document.forms[0].action="${ctx}/portal/order/changeCars.html";
+	document.forms[0].submit();
+}
 	
 </script>
 </head>
 
 <body>
-<form id="add_form" method="post" >
+<form id="add_form" method="post">
 <header class="home_header">
  <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:history.back(-1);"></span></div>
  <div class="header-title">购物车</div>
  </div>
 </header>
-<div class="viewport">
 <c:if test="${listsize >0}">
+<div class="viewport">
+
    <c:forEach items="${listcars}" var="mb" varStatus="sta">
   <div class="cart_items">
   <div class="cart-checkbox"><input type="checkbox" class="checkbox"  name="check_item" onchange="setTotal()"></div>
@@ -121,8 +108,8 @@ function delConfirm(id){
    <div class="nr relative">
     <div class="title"><a href="#">${mb.cdname}</a></div>
     <div class="member">
+  
   <input type="hidden" id="id" name="id" value="${mb.id}"/>
-    <input type="hidden" id="payType" name="payType" value="0"/>
   <input id="min" name="" type="button" value="" class="min" />  
   <input id="text_box" name="num" type="text" value="${mb.pnum}" class="min_text_box"  />  
   <input id="add" name="" type="button" value="" class="add" /></div>
@@ -137,8 +124,8 @@ function delConfirm(id){
    </div>
   </div>
   </c:forEach>
-  </c:if>
-</div>
+  </div>
+ </c:if>
  <c:if test="${listsize <=0}">
     <div class="viewport">
    <div class="cart_no">

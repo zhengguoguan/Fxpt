@@ -138,7 +138,6 @@ public class  OrderController extends BaseController {
 	    	  Address ads=  arService.findByCheckOd(openid);
 	    	request.setAttribute("listcars", carsService.findByOd(openid));
 	    	request.setAttribute("adds", arService.findByCheckOd(openid));
-	    	request.setAttribute("payType", request.getParameter("payType").toString());
 	    	return "portal/OrderSure";
 		}
 		  @RequestMapping(value = "/listCars.html")

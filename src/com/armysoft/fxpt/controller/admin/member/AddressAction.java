@@ -131,8 +131,8 @@ public class  AddressAction extends BaseController {
 	    	
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	//String openid="";
-	    		String openid=snsUserInfo.getOpenId();
+	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    	//String openid=snsUserInfo.getOpenId();
 	   	    List list=addressService.findByOd(openid);
 	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
 	    	request.setAttribute("listaddress", addressService.findByOd(openid));

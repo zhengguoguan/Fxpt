@@ -9,7 +9,20 @@
 <link href="${pageContext.request.contextPath}/theme/style/master.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${ctx}/js/jquery-1.8.3.js"></script>
 <script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/theme/index_files/animate.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/theme/index_files/flavr.css"> 
+    
+    <script type="text/javascript" src="${pageContext.request.contextPath}/theme/index_files/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/theme/index_files/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/theme/index_files/jquery.browser.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/theme/index_files/livedemo.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/theme/index_files/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
+<!-- END DEMO PAGE SCRIPT -->
+<!-- BEGIN flavr SCRIPT -->
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/theme/index_files/flavr.min.js"></script>
 <script type="text/javascript">
 var totalPrice=0; //总金额
 $(function(){
@@ -28,13 +41,28 @@ function setTotal(){
   } 
 </script>
 <script type="text/javascript">  
-  
+   function selectPayType(){
+     new $.flavr({ content : '选择支付方式 ',
+                            buttons : { success : { text: '微信支付', style: 'success', action:
+                            function(){ 
+                    	toPayFor(0);
+                    	loadPay();
+                             } }, 
+                            danger : { text: '货到付款', style: 'danger',
+                            action: function(){ 
+                            	 toPayFor(1); 
+                            	 loadPay();
+                            } } } });
+            }
+   function toPayFor(payTypeValue){
+	$("#payType").val(payTypeValue);
+    }                         
    function loadPay(){
 	 
 	   //设置按钮失效，避免重复提交
 	   $("#toPayId").attr("onclick","");
 	 //如果是货到付款，不用调用微信支付 
-	 var payType="${payType}";
+	 var payType=$("#payType").val();
 	 if(payType=="1"){
 			$.ajax({
 	            url:"${ctx}/portal/pubv3pay/payOffExecute.html?random=" + Math.random(),            //<span style="font-family:微软雅黑;">ajax调用微信统一接口获取prepayId</span>  
@@ -146,7 +174,7 @@ function setTotal(){
    <div class="addr_r">
      <a href="#" id="addAddress" class="s-href relative">
         <div class="mt_new">  
-        <div class="s1-name">${adds.lxrxm}</div>
+        <div class="s1-name">${adds.lxrxm}<input type="hidden" id="payType" name="payType" value="0"/></div>
          <div class="s1-phone">${adds.lxrdh}</div>
         </div>
        <div class="addr">${adds.provno}省&nbsp;${adds.cityno}市&nbsp;${adds.xxdz}</div>
@@ -189,7 +217,7 @@ function setTotal(){
 <div class="bottom-fxied">
  <div class="payment-total-bar">
   <div class="ottom-total-price">总额：<font color="#FF0000">¥:<label id="total"></label></font></div>
-  <span><a data-href="#" onclick="loadPay()" id="toPayId">去结算（1）</a></span></div></div>
+  <span><a data-href="#" onclick="selectPayType()" id="toPayId">去结算（1）</a></span></div></div>
   </c:if>
 </body>
 </html>
