@@ -55,7 +55,7 @@
 	</select>
 	<!-- 保存 -->
 	<insert id="insert" parameterType="orders">
-	<if test= "payType== '0'">
+	
 			insert into orders(OrderId,OpenId,RealName,Address,Tel,Tag,Price,RandCode,PreTime,PayType)
 		values(#{orderId} 		
 		, #{openId} 
@@ -68,8 +68,11 @@
 		,now()
 		,0
 		  )
-		</if>
-	<if test= "payType== '1'">
+		
+	
+		</insert>
+	<insert id="insert2" parameterType="orders">
+
 			insert into orders(OrderId,OpenId,RealName,Address,Tel,Tag,Price,PreTime,AfterTime,PayType)
 		values(#{orderId} 		
 		, #{openId} 
@@ -82,9 +85,8 @@
 		,now()
 		, 1
 		  )
-		</if>
+		
 		</insert>
-
 	<!-- 修改 -->
 	<update id="update" parameterType="orders">
 	    update orders set 

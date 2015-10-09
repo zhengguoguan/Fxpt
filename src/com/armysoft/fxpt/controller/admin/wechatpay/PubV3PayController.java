@@ -104,6 +104,7 @@ public class  PubV3PayController extends BaseController {
 		try{	
 			 HttpSession session = request.getSession();
 			 SNSUserInfo sui=(SNSUserInfo)session.getAttribute("snsUserInfo");
+			 //String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
 			 SimpleDateFormat sFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 			String out_trade_no= sFormat.format(new Date());
 			  //插入订单记录与订单细目记录

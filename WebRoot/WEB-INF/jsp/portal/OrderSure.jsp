@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!doctype html>
 <html style="width: 100%; height: 100%;">
 <head>
@@ -28,6 +29,7 @@ var totalPrice=0; //总金额
 $(function(){
 	        	$("#addAddress").attr("href","${ctx}/admin/address/listAddress.html");
 	        	setTotal();
+	        	
 });
 
 function setTotal(){ 
@@ -56,7 +58,10 @@ function setTotal(){
             }
    function toPayFor(payTypeValue){
 	$("#payType").val(payTypeValue);
-    }                         
+    }            
+   function selectAddress(){
+
+	   }             
    function loadPay(){
 	 
 	   //设置按钮失效，避免重复提交
@@ -83,10 +88,10 @@ function setTotal(){
 		  	});
 		 return;
 		 }
-	   var tp=parseInt(totalPrice)*100;alert(tp);
+	   var tp=parseInt(totalPrice)*100;
 		$.ajax({
             url:"${ctx}/portal/pubv3pay/payExecute.html?random=" + Math.random(),            //<span style="font-family:微软雅黑;">ajax调用微信统一接口获取prepayId</span>  
-			data: 'url='+window.location.href+'&totalPrice='+1,
+			data: 'url='+window.location.href+'&totalPrice='+tp,
 	  		type:'post',
 	  		dataType:'text',
 	  		async:false,
@@ -169,6 +174,7 @@ function setTotal(){
  </div>
 </header>
 <div class="viewport">
+<c:if test="${not empty adds}">
   <div class="step_order">
    <div class="addr_l">运至</div>
    <div class="addr_r">
@@ -183,10 +189,11 @@ function setTotal(){
       
       </div>
   </div>
+  </c:if>
   <div class="order_box">
   <div class="order_info">
    <h1 class="h1">订单信息</h1>
-   <div class="edit_cart"><a href="${ctx}/admin/cars/listCars.html">编辑购物车</a></div>
+   <div class="edit_cart"><a href="${ctx}/portal/order/listCars.html">编辑购物车</a></div>
   </div>
    <c:if test="${listcars !=null}">
    <c:forEach items="${listcars}" var="mb" varStatus="sta">
@@ -202,22 +209,26 @@ function setTotal(){
   </div>
   </c:forEach>
   </c:if>
-  <c:if test="${listcars ==null}">
+  <c:if test="${listcars ==null||fn:length(listcars)<=0}">
     <div class="viewport">
    <div class="cart_no">
    <span>您的购物车里还没有商品</span>
-   <div class="go_cart"><a href="${ctx}/admin">现在去逛逛</a></div>
+   <div class="go_cart"><a href="${ctx}">现在去逛逛</a></div>
    </div>
 </div>
   </c:if>
   </div>
   
 </div>
-<c:if test="${listcars !=null}">
+<c:if test="${listcars !=null&&fn:length(listcars)>0}">
 <div class="bottom-fxied">
  <div class="payment-total-bar">
   <div class="ottom-total-price">总额：<font color="#FF0000">¥:<label id="total"></label></font></div>
-  <span><a data-href="#" onclick="selectPayType()" id="toPayId">去结算（1）</a></span></div></div>
+
+  <span>  <c:if test="${empty adds}">  <a href="${ctx}/admin/address/listAddress.html" id="toPayId">先选择地址</a></c:if>
+  <c:if test="${not empty adds}">  <a data-href="#" onclick="selectPayType()" id="toPayId">去 结 算</a></c:if>
+
+  </span></div></div>
   </c:if>
 </body>
 </html>

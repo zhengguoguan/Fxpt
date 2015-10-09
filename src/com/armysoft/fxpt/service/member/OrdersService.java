@@ -72,7 +72,9 @@ public class OrdersService extends BaseDao {
 	public void insert(Orders model) {
 		super.defInsert(nameSpace, model);
 	}
-	
+	public void insert2(Orders model) {
+		super.nativeInsert(nameSpace+".insert2", model);
+	}
 	/**
 	 * 添加数据
 	 * @param question

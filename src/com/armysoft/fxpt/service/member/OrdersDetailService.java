@@ -42,7 +42,12 @@ public class OrdersDetailService extends BaseDao {
 		for(Map<String, Object> m:list){
 			m.put("orderId", model.getOrderId());
 		}
-		 ordersService.insert(model);
+		if(model.getPayType()==0){
+			 ordersService.insert(model);
+		}else if(model.getPayType()==1){
+			 ordersService.insert2(model);
+		}
+		
 		super.nativeInsert(nameSpace+".batchInsert", list);
 		//同时删除相应的购物车记录
 		carsService.deleteByOpenId(model.getOpenId());

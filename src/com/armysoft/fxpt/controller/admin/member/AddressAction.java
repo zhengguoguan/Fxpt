@@ -107,8 +107,8 @@ public class  AddressAction extends BaseController {
 		public  String listAddress(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		    HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
-	    	//String openid=snsUserInfo.getOpenId();
+	    	//String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
+	    	String openid=snsUserInfo.getOpenId();
 	   	    List list=addressService.findByOd(openid);
 	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
 	    	request.setAttribute("listaddress", addressService.findByOd(openid));
@@ -131,8 +131,8 @@ public class  AddressAction extends BaseController {
 	    	
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
-	    	//String openid=snsUserInfo.getOpenId();
+	    	//String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
+	    	String openid=snsUserInfo.getOpenId();
 	   	    List list=addressService.findByOd(openid);
 	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
 	    	request.setAttribute("listaddress", addressService.findByOd(openid));
@@ -161,8 +161,8 @@ public class  AddressAction extends BaseController {
 			}
 			HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    		String openid="okETVtxhhU46yChDM4jM-xSCws08";
-	    		// String openid=snsUserInfo.getOpenId();
+	    		//String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
+	    		 String openid=snsUserInfo.getOpenId();
 	    	
 	    	request.setAttribute("listcars", service.findByOd(openid));
 	    	request.setAttribute("adds", addressService.findByOd(openid));
