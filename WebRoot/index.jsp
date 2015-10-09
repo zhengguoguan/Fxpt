@@ -16,6 +16,14 @@
 <script>
 $(function(){
 	list();
+	$('#cart').on('click', function(){
+              document.forms[0].action="${ctx}/portal/order/listCars.html";
+              document.forms[0].submit();
+              });
+   $('#home').on('click', function(){
+              document.forms[0].action="${ctx}/index.jsp";
+              document.forms[0].submit();
+              });
 })
 function list(){
 	$.ajax({
@@ -49,6 +57,7 @@ function list(){
 </head>
 
 <body>
+<form id="add_form" method="post">
 <div class="mhome_top"><img src="${ctx}/theme/images/logo.png" width="116" height="46"></div>
 <div class="viewport">
   <div class="search relative">
@@ -122,12 +131,12 @@ var banner = Swipe(document.getElementById('mySwipe'), {
     <div class="section_box">
         <h1>精选类目</h1>
       <ul class="category">
-        <li><img src="${ctx}/theme/images/a01.png" width="100%"></li>
-        <li><img src="${ctx}/theme/images/a02.png" width="100%"></li>
-        <li><img src="${ctx}/theme/images/a03.png" width="100%"></li>
-        <li><img src="${ctx}/theme/images/a04.png" width="100%"></li>
-        <li><img src="${ctx}/theme/images/a05.png" width="100%"></li>
-        <li><img src="${ctx}/theme/images/a06.png" width="100%"></li>
+       <li><a href="admin/cdInformation/List.html?Pid=1"><img src="${ctx}/theme/images/a01.png" width="100%"></a></li>
+        <li><a href="admin/cdInformation/List.html?Pid=2"><img src="${ctx}/theme/images/a02.png" width="100%"></a></li>
+        <li><a href="admin/cdInformation/List.html?Pid=3"><img src="${ctx}/theme/images/a03.png" width="100%"></a></li>
+        <li><a href="admin/cdInformation/List.html?Pid=4"><img src="${ctx}/theme/images/a04.png" width="100%"></a></li>
+        <li><a href="admin/cdInformation/List.html?Pid=5"><img src="${ctx}/theme/images/a05.png" width="100%"></a></li>
+        <li><a href="admin/cdInformation/List.html?Pid=6"><img src="${ctx}/theme/images/a06.png" width="100%"></a></li>
       </ul>
     </div>
   </div>`
@@ -144,6 +153,7 @@ var banner = Swipe(document.getElementById('mySwipe'), {
    <div class="love-loading"><a href="javascript:void(0)" id="nextPage" onclick="list();return false;">点击继续加载</a></div>
   </div>
 </div>
-<div class="bottom-fxied"><footer><a data-href="#"><span class="home"></span><p>首页</p></a><a data-href="#"><span class="classify"></span><p>分类</p></a><a data-href="#"><span class="cart"></span><p>购物车</p></a><a data-href="#"><span class="my"></span><p>会员中心</p></a></footer></div>
+<div class="bottom-fxied"><footer><a data-href="#"><span class="home" id="home"></span><p>首页</p></a><a data-href="#"><span class="classify"></span><p>分类</p></a><a data-href="#"><span class="cart" id="cart"></span><p>购物车</p></a><a data-href="#"><span class="my"></span><p>会员中心</p></a></footer></div>
+</form>
 </body>
 </html>

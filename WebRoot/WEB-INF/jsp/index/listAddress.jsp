@@ -37,6 +37,18 @@ $(function(){
  document.forms[0].action="${ctx}/admin/address/changeAddress.html";
 	   document.forms[0].submit();
 	   }
+	   $(function(){
+	
+	$('#cart').on('click', function(){
+              document.forms[0].action="${ctx}/portal/order/listCars.html";
+              document.forms[0].submit();
+              });
+   $('#home').on('click', function(){
+              document.forms[0].action="${ctx}/index.jsp";
+              document.forms[0].submit();
+              });
+              
+})
 </script>
 </head>
 
@@ -74,7 +86,7 @@ $(function(){
      </div>
   
 </div>
-<div class="bottom-fxied"><footer><a data-href="#"><span class="home"></span><p>首页</p></a><a data-href="#"><span class="classify"></span><p>分类</p></a><a data-href="#"><span class="cart"></span><p>购物车</p></a><a data-href="#"><span class="my"></span><p>会员中心</p></a></footer></div>
+<div class="bottom-fxied"><footer><a data-href="#"><span class="home" id="home"></span><p>首页</p></a><a data-href="#"><span class="classify"></span><p>分类</p></a><a data-href="#"><span class="cart" id="cart"></span><p>购物车</p></a><a data-href="#"><span class="my"></span><p>会员中心</p></a></footer></div>
 </form>
 </body>
 </html>
