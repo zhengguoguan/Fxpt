@@ -106,8 +106,8 @@ public class  OrderController extends BaseController {
 		public  String orderSure(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	 	// String openid=snsUserInfo.getOpenId();
-	    	String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
+	    	 	 String openid=snsUserInfo.getOpenId();
+	    	 	//String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
 	    	request.setAttribute("listcars", carsService.findByOd(openid));
 	    	request.setAttribute("adds", arService.findByCheckOd(openid));
 	    	
@@ -133,8 +133,8 @@ public class  OrderController extends BaseController {
 	    	}
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
-	    	//	String openid=snsUserInfo.getOpenId();
+	    	//String openid="okETVt03KpFheLrWsY6G7aUS-Lm0";
+	    		String openid=snsUserInfo.getOpenId();
 	    	  Address ads=  arService.findByCheckOd(openid);
 	    	request.setAttribute("listcars", carsService.findByOd(openid));
 	    	request.setAttribute("adds", arService.findByCheckOd(openid));
@@ -144,8 +144,8 @@ public class  OrderController extends BaseController {
 			public  String listCars(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		    	HttpSession session = request.getSession();
 		    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-		    		String openid="";
-		    		//   String openid=snsUserInfo.getOpenId();
+		    	// String openid="";
+		    		  String openid=snsUserInfo.getOpenId();
 		   	    List list=carsService.findByOd(openid);
 		   	    request.setAttribute("listsize", carsService.findByOd(openid).size());
 		    	request.setAttribute("listcars", carsService.findByOd(openid));
@@ -156,8 +156,8 @@ public class  OrderController extends BaseController {
 			  carsService.delete(id);
 				HttpSession session = request.getSession();
 		    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-		    	String openid="";
-		    	//	 String openid=snsUserInfo.getOpenId();
+		    	//String openid="";
+		    		 String openid=snsUserInfo.getOpenId();
 		    	 request.setAttribute("listsize", carsService.findByOd(openid).size());
 		    	request.setAttribute("listcars", carsService.findByOd(openid));
 				return "portal/listcars";
