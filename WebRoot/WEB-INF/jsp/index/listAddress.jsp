@@ -23,8 +23,6 @@ $(function(){
 			var index=$("input[name='check']").index(this);
 			$("input[name='check']").eq(index).toggleClass("checked");//伪复选
 			$("input[name='checkvalue']").eq(index).attr("value","1");//伪复选
-			document.forms[0].action="${ctx}/admin/address/changeAddress.html";
-            document.forms[0].submit();  
 	});	
 	//全选
 	
@@ -34,6 +32,10 @@ $(function(){
  document.forms[0].action="${ctx}/portal/order/changeCars.html";
 	   document.forms[0].submit();
 	   }
+	   function select(){
+ document.forms[0].action="${ctx}/admin/address/changeAddress.html";
+	   document.forms[0].submit();
+	   }
 </script>
 </head>
 
@@ -41,6 +43,7 @@ $(function(){
 <form id="add_form" method="post">
 <header class="home_header">
  <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:back();"></span></div>
+  <div class="header-icon-right"><span onclick="javascript:select();"></span></div>
  <div class="header-title">选择联系地址</div>
  </div>
 </header>

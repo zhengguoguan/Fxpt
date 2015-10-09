@@ -121,7 +121,7 @@ public class  OrderController extends BaseController {
 		@RequestMapping(value = "/changeCars.html")
 		public String changeCars(String id,String num,HttpServletRequest request,HttpServletResponse response) throws ParseException {
 	    	JSONObject jsonObject = new JSONObject();
-	    	if(id!="" || id!=null){
+	    	if(num!="" && num!=null){
 	    	String[] ids=id.split(",");
 	    	String[] nums=num.split(",");
 	    	
