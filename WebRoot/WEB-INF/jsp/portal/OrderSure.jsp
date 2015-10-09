@@ -158,13 +158,17 @@ function setTotal(){
 	  		
 	  	});
 	   }
-  
+       function back(){
+       document.forms[0].action="${ctx}/portal/order/listCars.html";
+	   document.forms[0].submit();
+	   }
     </script>  
 </head>
 
 <body>
+<form id="add_form" method="post">
 <header class="home_header">
- <div class="header-bar"><div class="header-icon-back"><span></span></div>
+ <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:back();"></span></div>
  <div class="header-title">确认订单</div>
  </div>
 </header>
@@ -186,7 +190,7 @@ function setTotal(){
   <div class="order_box">
   <div class="order_info">
    <h1 class="h1">订单信息</h1>
-   <div class="edit_cart"><a href="${ctx}/admin/cars/listCars.html">编辑购物车</a></div>
+   <div class="edit_cart"><a href="${ctx}/portal/order/listCars.html">编辑购物车</a></div>
   </div>
    <c:if test="${listcars !=null}">
    <c:forEach items="${listcars}" var="mb" varStatus="sta">
@@ -219,5 +223,6 @@ function setTotal(){
   <div class="ottom-total-price">总额：<font color="#FF0000">¥:<label id="total"></label></font></div>
   <span><a data-href="#" onclick="selectPayType()" id="toPayId">去结算（1）</a></span></div></div>
   </c:if>
+  </form>
 </body>
 </html>

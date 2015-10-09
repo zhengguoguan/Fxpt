@@ -546,12 +546,12 @@ p {
 .de_cart {
 	height: 50px;
 	background-color: #e8e8e8;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: 20px;
+	padding-left: 20px;
 	overflow: hidden;
 }
 .bottom-fxied .de_cart span {
-	width: 31%;
+	width: 48%;
 	padding-right: 1%;
 	padding-left: 1%;
 	display: block;
@@ -878,20 +878,6 @@ p {
 	border: 1px solid #d7d7d7;
 	border-radius: 3px;
 	height: 40px;
-}
-.add_address .li .prov {
-width: 100%;
-display: block;
-border: 1px solid #d7d7d7;
-border-radius: 3px;
-height: 40px;
-}
-.add_address .li .city {
-width: 100%;
-display: block;
-border: 1px solid #d7d7d7;
-border-radius: 3px;
-height: 40px;
 }
 .add_btn {
 	padding: 10px;
