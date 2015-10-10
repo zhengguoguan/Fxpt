@@ -124,6 +124,12 @@ public class  CdInformationController extends BaseController {
     	String idStr = request.getParameter("id");
     	String key = request.getParameter("key");
     	String pStr = request.getParameter("p");
+    	String pname = request.getParameter("pname");
+    	String name="";
+    	if(pname!=null && pname!=""){
+    		name=URLDecoder.decode(pname,"UTF-8");
+    	}
+    	
     	int p = 1;
     	if (pStr!=null && pStr!="") {
     	      p = Integer.parseInt(pStr);
@@ -138,6 +144,10 @@ public class  CdInformationController extends BaseController {
 		 if(key !="" && key!=null){
 				params.put("key", key);
 				request.setAttribute("key", key);
+		    }
+		 if(name !="" && name!=null){
+				params.put("pname", name);
+				request.setAttribute("pname", name);
 		    }
     	 List cdList= service.getByPages(params, pager);
 		 JSONObject jsonObject = new JSONObject();
@@ -207,7 +217,14 @@ public class  CdInformationController extends BaseController {
     	request.setAttribute("pid", pid);
     	return "index/list";
 	}
-    
+    @RequestMapping(value = "/FindList.html")
+	public  String FindList(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+    	
+    	String pname=request.getParameter("Pname");
+    	request.setAttribute("pcname", "商品搜索");
+    	request.setAttribute("pname", pname);
+    	return "index/findlist";
+	}
     
     @RequestMapping(value = "/inputExport.html")
 	public String  OutPtqfqk(@RequestParam MultipartFile exlFile, HttpServletRequest request,HttpServletResponse response) throws ParseException, IOException {

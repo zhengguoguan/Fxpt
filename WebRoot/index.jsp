@@ -53,6 +53,23 @@ function list(){
 		  		
 		  	});
 }
+
+ function find(){
+ var findvalue= $("#find").val();
+ document.forms[0].action="${ctx}/admin/cdInformation/FindList.html?Pname="+encodeURI(encodeURI(findvalue));
+ document.forms[0].submit();
+	   }
+  function clean(){
+  $("#find").attr("value","");
+	   }
+   function huanyuan(){
+  var findvalue= $("#find").val();
+  if(findvalue==""){
+  $("#find").attr("value","搜 索");
+  }
+  }
+  	   
+	   
 </script>	
 </head>
 
@@ -61,8 +78,8 @@ function list(){
 <div class="mhome_top"><img src="${ctx}/theme/images/logo.png" width="116" height="46"></div>
 <div class="viewport">
   <div class="search relative">
-    <input type="text" value="搜 索">
-    <a href="javascript:void(0)" id="index_search_submit" class="icon-search"><span>搜索</span></a></div>
+    <input type="text" id="find" value="搜 索" onFocus="clean();" onBlur="huanyuan();">
+    <a href="javascript:find()" id="index_search_submit" class="icon-search"><span>搜索</span></a></div>
   <div class="flash">
     <div class="addWrap">
       <div class="swipe" id="mySwipe">

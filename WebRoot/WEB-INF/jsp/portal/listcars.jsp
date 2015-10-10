@@ -87,14 +87,17 @@ function delConfirm(id){
 	document.forms[0].action="${ctx}/portal/order/changeCars.html";
 	document.forms[0].submit();
 }
-	
+	function back(){
+      document.forms[0].action="${ctx}/index.jsp";
+	   document.forms[0].submit();
+	   }
 </script>
 </head>
 
 <body>
 <form id="add_form" method="post">
 <header class="home_header">
- <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:history.back(-1);"></span></div>
+ <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:back();"></span></div>
  <div class="header-title">购物车</div>
  </div>
 </header>

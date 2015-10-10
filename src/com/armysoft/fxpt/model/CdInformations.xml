@@ -17,6 +17,9 @@
 			<if test="parm.fcdname != null and parm.fcdname!= ''">
 		and a.cdname like CONCAT('%', #{parm.fcdname}, '%')
 		</if> 
+		<if test="parm.pname != null and parm.pname!= ''">
+		and a.cdname like CONCAT('%', #{parm.pname}, '%')
+		</if> 
 		<if test="parm.idStr != null and parm.idStr != ''">
 		and (a.cdcategories = #{parm.idStr} or b.Fatherid = #{parm.idStr})
 		</if>
