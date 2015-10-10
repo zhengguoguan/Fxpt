@@ -1,4 +1,4 @@
-package com.armysoft.fxpt.controller.admin.wechatpay;
+package com.armysoft.fxpt.controller.portal.wechatpay;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -107,4 +107,7 @@ public class OrdersService extends BaseDao {
 		super.nativeUpdate(nameSpace+".updateTag", params);
 	}
 
+	public void delete(Long id) {
+		super.defDelete(nameSpace, id);
+	}
 }

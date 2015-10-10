@@ -1,4 +1,4 @@
-package com.armysoft.fxpt.controller.admin.wechatpay;
+package com.armysoft.fxpt.controller.portal.wechatpay;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,7 +51,7 @@ import com.armysoft.fxpt.wechatpay.XMLUtil;
 
 
 
-@Controller
+@Controller("portalOrderController")
 @RequestMapping("portal/order")
 public class  OrderController extends BaseController {
 	@Resource
