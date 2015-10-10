@@ -54,7 +54,8 @@
 	                       <value>/admin/cars/toOrders</value>
 	                       <value>/admin/cars/changeCars</value>
 	                       <value>/admin/address/save</value>
-	                        <value>/admin/cdInformation/List</value>
+	                        <value>admin/cdInformation/List</value>
+	                       <value>admin/address/changeAddress</value>
 	                       <value>/admin/cdInformation/FindList</value>
 	                  </list>
 	               </property>
