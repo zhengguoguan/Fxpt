@@ -23,7 +23,6 @@ $(function(){
 			var index=$("input[name='check']").index(this);
 			$("input[name='check']").eq(index).toggleClass("checked");//伪复选
 			$("input[name='checkvalue']").eq(index).attr("value","1");//伪复选
-			select();
 	});	
 	//全选
 	

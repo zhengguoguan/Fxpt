@@ -107,8 +107,8 @@ public class  AddressAction extends BaseController {
 		public  String listAddress(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		    HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-
-	    	String openid=snsUserInfo.getOpenId();
+	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    	//String openid=snsUserInfo.getOpenId();
 	   	    List list=addressService.findByOd(openid);
 	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
 	    	request.setAttribute("listaddress", addressService.findByOd(openid));
@@ -116,7 +116,7 @@ public class  AddressAction extends BaseController {
 		}
 	 
 	 @RequestMapping(value = "/changeAddress.html")
-		public String changeAddress(String id,String checkvalue,HttpServletRequest request,HttpServletResponse response) throws ParseException {
+		public String changeAddress(String id,String checkvalue,HttpServletRequest request,HttpServletResponse response) throws ParseException, IOException {
 	    	JSONObject jsonObject = new JSONObject();
 	    	
 	    	String[] checks=checkvalue.split(",");
@@ -129,28 +129,22 @@ public class  AddressAction extends BaseController {
 	    	}
 	    	
 	    	
-	    	HttpSession session = request.getSession();
-	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-
-	    	String openid=snsUserInfo.getOpenId();
-	   	    List list=addressService.findByOd(openid);
-	   	    request.setAttribute("listsize", addressService.findByOd(openid).size());
-	    	request.setAttribute("listaddress", addressService.findByOd(openid));
-	    	return "index/listAddress";
+	    	response.sendRedirect(request.getContextPath()+"/portal/order/orderSure.html");
+	    	return null;
 		}
 	 
 	 
 	 @RequestMapping(value = SAVE)
-		public String save(Address entity, Model model, HttpServletRequest request) throws IllegalStateException, IOException {
+		public String save(Address entity, Model model, HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
 			if (entity.getId() == null) {
 				
 				entity.setCreatedate(new Date());
 				HttpSession session = request.getSession();
 		    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-		    	//String openid="";
-		    	String openid=snsUserInfo.getOpenId();
+		    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
+		    	//String openid=snsUserInfo.getOpenId();
 		    	List list=addressService.findByOd(openid);
-		    	if(list==null){
+		    	if(list.size()<1){
 		    		entity.setSeltype("1");
 		    		
 		    	}
@@ -159,15 +153,8 @@ public class  AddressAction extends BaseController {
 			} else {
 				addressService.update(entity);
 			}
-			HttpSession session = request.getSession();
-	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-
-	    	// String openid="okETVtxhhU46yChDM4jM-xSCws08";
-	    		String openid=snsUserInfo.getOpenId();
-
+			response.sendRedirect(request.getContextPath()+"/portal/order/orderSure.html");
+	    	return null;
 	    	
-	    	request.setAttribute("listcars", service.findByOd(openid));
-	    	request.setAttribute("adds", addressService.findByOd(openid));
-	    	return "index/toorders";
 		}
 }

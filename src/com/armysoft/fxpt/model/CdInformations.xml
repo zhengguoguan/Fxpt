@@ -6,19 +6,19 @@
 <mapper namespace="CdInformationsOpt">
 	<!-- 表列名 -->
 	<sql id="columns">	
-	a.ID,a.Cdname,a.Cdprice,a.Cdcategories,a.Cdpicturech</sql>
+	a.ID,a.Cdname,a.Cdprice,a.Cdcategories,a.Cdpicturech,b.Fatherid </sql>
 	<!-- 通用条件sql语句 -->
 	<sql id="condition" >
 		from cd_information a left join product_cate b on a.Cdcategories=b.ID
 		where 1 = 1
 			<if test="parm.fcpbh != null and parm.fcpbh != ''">
-		and cpbh  like CONCAT('%', #{parm.fcpbh}, '%')
+		and a.cpbh  like CONCAT('%', #{parm.fcpbh}, '%')
 		</if>
 			<if test="parm.fcdname != null and parm.fcdname!= ''">
-		and cdname like CONCAT('%', #{parm.fcdname}, '%')
+		and a.cdname like CONCAT('%', #{parm.fcdname}, '%')
 		</if> 
 		<if test="parm.idStr != null and parm.idStr != ''">
-		and cdcategories = #{parm.idStr}
+		and (a.cdcategories = #{parm.idStr} or b.Fatherid = #{parm.idStr})
 		</if>
 			<if test="parm.key != null and parm.key!= ''">
 		and cdname like CONCAT('%', #{parm.key}, '%')

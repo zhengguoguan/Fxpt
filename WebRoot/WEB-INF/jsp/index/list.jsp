@@ -14,6 +14,14 @@
 		var pid = '${pid}';
 		$(function(){
 	    list();
+	    $('#cart').on('click', function(){
+              document.forms[0].action="${ctx}/portal/order/listCars.html";
+              document.forms[0].submit();
+              });
+        $('#home').on('click', function(){
+              document.forms[0].action="${ctx}/index.jsp";
+              document.forms[0].submit();
+              });
         })
         function list(){
 	$.ajax({
@@ -43,13 +51,18 @@
 		  		
 		  	});
 }
+function back(){
+              document.forms[0].action="${ctx}/index.jsp";
+              document.forms[0].submit();
+	  }  
 </script>
 
 </head>
 
 <body>
+<form id="add_form" method="post">
 <header class="home_header">
- <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:history.back(-1);"></span></div>
+ <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:back();"></span></div>
  <div class="header-title">产品列表</div>
  </div>
 </header>
@@ -63,6 +76,7 @@
   </div>
   
 </div>
-<div class="bottom-fxied"><footer><a data-href="#"><span class="home"></span><p>首页</p></a><a data-href="#"><span class="classify"></span><p>分类</p></a><a data-href="#"><span class="cart"></span><p>购物车</p></a><a data-href="#"><span class="my"></span><p>会员中心</p></a></footer></div>
+<div class="bottom-fxied"><footer><a data-href="#"><span class="home" id="home"></span><p>首页</p></a><a data-href="#"><span class="classify"></span><p>分类</p></a><a data-href="#"><span class="cart" id="cart"></span><p>购物车</p></a><a data-href="#"><span class="my"></span><p>会员中心</p></a></footer></div>
 </body>
+</form>
 </html>

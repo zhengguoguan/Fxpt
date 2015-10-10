@@ -879,6 +879,20 @@ p {
 	border-radius: 3px;
 	height: 40px;
 }
+.add_address .li .prov {
+	width: 100%;
+	display: block;
+	border: 1px solid #d7d7d7;
+	border-radius: 3px;
+	height: 40px;
+}
+.add_address .li .city {
+	width: 100%;
+	display: block;
+	border: 1px solid #d7d7d7;
+	border-radius: 3px;
+	height: 40px;
+}
 .add_btn {
 	padding: 10px;
 	background-color: #FFF;

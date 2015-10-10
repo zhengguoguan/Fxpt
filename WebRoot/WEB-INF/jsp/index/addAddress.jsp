@@ -21,6 +21,7 @@ $("#city_3").citySelect({
 	});
 	
 	$("#save").click(function(){
+	   $("#save").attr("onclick","");
         document.forms[0].action="${ctx}/admin/address/save.html";
 	   document.forms[0].submit();
       
@@ -32,7 +33,7 @@ $("#city_3").citySelect({
 </head>
 
 <body>
-<form id="add_form"   action="${ctx}/admin/address/save.html"  method="post">
+<form id="add_form"   method="post">
 <header class="home_header">
  <div class="header-bar"><div class="header-icon-back"><span onclick="javascript:history.back(-1);"></span></div>
 
