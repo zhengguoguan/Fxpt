@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,8 +25,11 @@ import net.sf.json.JSONObject;
 import org.armysoft.core.Pagination;
 import org.armysoft.springmvc.controller.BaseController;
 import org.jdom.JDOMException;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,9 +64,16 @@ public class  OrderController extends BaseController {
 	@Resource
 	private OrdersService ordersService;
 
-	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(true);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, true));
+	}
+
 	  @RequestMapping(value = PAGE_LIST)    
-		public String getByPage(@PathVariable Integer currentPage,Model model,String tag,String beginTime,String endTime,String payType,
+		public String getByPage(@PathVariable Integer currentPage,Model model,String tag,Date beginTime,Date endTime,String payType,
 			 String orderId,HttpServletRequest request) {
 		  
 			Pagination pager = initPage(currentPage);
