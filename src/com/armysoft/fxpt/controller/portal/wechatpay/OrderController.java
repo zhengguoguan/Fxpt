@@ -106,9 +106,9 @@ public class  OrderController extends BaseController {
 		public  String orderSure(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	//String openid=snsUserInfo.getOpenId();
+	    	String openid=snsUserInfo.getOpenId();
 
-	    	 String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    	// String openid="okETVtxhhU46yChDM4jM-xSCws08";
 	    	List<Cars>  listcars=carsService.findByOd(openid);
 	    	request.setAttribute("listcars", listcars);
 
@@ -136,8 +136,8 @@ public class  OrderController extends BaseController {
 	    	}
 	    	HttpSession session = request.getSession();
 	    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
-	    	String openid="okETVtxhhU46yChDM4jM-xSCws08";
-	    	//String openid=snsUserInfo.getOpenId();
+	    	//String openid="okETVtxhhU46yChDM4jM-xSCws08";
+	    	String openid=snsUserInfo.getOpenId();
 	    	  Address ads=  arService.findByCheckOd(openid);
 	    	request.setAttribute("listcars", carsService.findByOd(openid));
 	    	request.setAttribute("adds", arService.findByCheckOd(openid));
@@ -148,8 +148,8 @@ public class  OrderController extends BaseController {
 		    	HttpSession session = request.getSession();
 		    	SNSUserInfo snsUserInfo =(SNSUserInfo) session.getAttribute("snsUserInfo");
 
-		    	  String openid="okETVtxhhU46yChDM4jM-xSCws08";
-		    	  //  String openid=snsUserInfo.getOpenId();
+		    	 // String openid="okETVtxhhU46yChDM4jM-xSCws08";
+		    	    String openid=snsUserInfo.getOpenId();
 
 		   	    List list=carsService.findByOd(openid);
 		   	    request.setAttribute("listsize", carsService.findByOd(openid).size());
