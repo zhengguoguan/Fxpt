@@ -23,6 +23,7 @@ public class AppCache {
 	}
 	public static <T> T getDb(String key)
 	{
+		
 		return (T)db_store.get(key);
 	}
 	@Resource
