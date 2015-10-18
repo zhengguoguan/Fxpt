@@ -18,7 +18,7 @@ required:必选项
 
 		// 默认值
 		settings=$.extend({
-			url:"../../theme/js/city.min.js",
+			url:ctx+"/theme/js/city.min.js",
 			prov:null,
 			city:null,
 			dist:null,

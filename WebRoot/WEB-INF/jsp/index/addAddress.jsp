@@ -8,12 +8,16 @@
 <title>新增地址</title>
 <link href="${pageContext.request.contextPath}/theme/style/index.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/theme/style/master.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+var ctx="${ctx}";
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/city.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/theme/js/jquery.cityselect.js"></script>
 
 
 <script type="text/javascript">
+
 $(function(){
 $("#city_3").citySelect({
     	prov:"广东", 

@@ -5,17 +5,32 @@
 
 <mapper namespace="OrdersOpt">
 	<!-- 表列名 -->
-	<sql id="columns">	a.ID,a.OrderId,a.OpenId ,a.RealName ,a.Address ,a.Zip ,a.Tel ,a.Email ,a.memo,a.AfterTime,a.Tag,a.Price,a.PreTime,a.RandCode</sql>
+	<sql id="columns">	a.ID,a.OrderId,a.OpenId ,a.RealName ,a.Address ,a.Zip ,a.Tel ,a.Email ,a.memo,a.AfterTime,a.Tag,a.PayType,a.Price,a.PreTime,a.RandCode</sql>
 	<!-- 通用条件sql语句 -->
 	<sql id="condition" >
 		from orders a 
 		where 1 = 1
+		<if test="parm.openId != null and parm.openId != ''">
 		and a.OpenId=#{parm.openId}
+		and a.Tag  != 2
+		</if>
+		
 		<if test="parm.tag != null and parm.tag != ''">
 		and a.Tag  = #{parm.tag}
 		</if>
-		and a.Tag  != 2
-		order by PreTime desc,AfterTime desc
+		<if test="parm.payType != null and parm.payType != ''">
+		and a.PayType  = #{parm.payType}
+		</if>
+		<if test="parm.orderId != null and parm.orderId != ''">
+		and a.OrderId  = #{parm.orderId}
+		</if>
+		<if test="parm.beginTime != null and parm.beginTime != ''">
+		and unix_timestamp(a.PreTime) &gt;= unix_timestamp(#{parm.beginTime})
+		</if>
+		<if test="parm.endTime != null and parm.endTime != ''">
+		and unix_timestamp(a.PreTime) &lt;= unix_timestamp(#{parm.endTime})
+		</if>
+		order by a.PreTime desc,a.AfterTime desc
    </sql>
 	<!-- 实体映射 -->
 	<resultMap id="ordersMap" type="Orders">
