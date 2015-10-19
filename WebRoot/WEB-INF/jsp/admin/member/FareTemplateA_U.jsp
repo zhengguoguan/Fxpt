@@ -33,6 +33,13 @@ $("#city_3").citySelect({
 	
 });
 ////////////////平邮/////////////////
+function mailCheckboxOnclick(obj){
+	if(obj.checked){
+		$("#mailMode").css("display","");
+		}else{
+			$("#mailMode").css("display","none");
+			}
+}
 function deleteMailTr(no){
 	 $("#trMail"+no).remove();
 	// trMailCount=trMailCount-1;
@@ -54,6 +61,13 @@ function addMailTr(){
 	tbody.html(tbody.html().concat(newRow)); 
 }
 ////////////////快递/////////////////
+function expressCheckboxOnclick(obj){
+	if(obj.checked){
+		$("#expressMode").css("display","");
+		}else{
+			$("#expressMode").css("display","none");
+			}
+}
 function deleteExpressTr(no){
 	 $("#trExpress"+no).remove();
 	 //trMailCount=trMailCount-1;
@@ -75,6 +89,13 @@ function addExpressTr(){
 	tbody.html(tbody.html().concat(newRow)); 
 }
 ////////////////EMS/////////////////
+function emsCheckboxOnclick(obj){
+	if(obj.checked){
+		$("#emsMode").css("display","");
+		}else{
+			$("#emsMode").css("display","none");
+			}
+}
 function deleteEmsTr(no){
 	 $("#trEms"+no).remove();
 	// trMailCount=trMailCount-1;
@@ -107,7 +128,7 @@ html { overflow:-moz-scrollbars-vertical;}
 
 
 <div class="admin_table">
-<form id="add_form" action='' method="post">
+<form id="add_form" action="${ctx }/admin/fareTemplate/save.html" method="post">
 
   <div class="add_info">
 
@@ -124,7 +145,7 @@ html { overflow:-moz-scrollbars-vertical;}
      <th class="w100">宝贝地址:</th>
      <td>
      	 <div id="city_3"><select class="prov" name="provno"  id="provno"></select>省<select class="city" name="cityno"  id="cityno" disabled="disabled"></select>市
-    </div>
+   (发货地址) </div>
      </td>
          </tr>
             <tr>
@@ -135,20 +156,20 @@ html { overflow:-moz-scrollbars-vertical;}
       <option value="12">12小时内</option>
        <option value="24">24小时内</option>
          <option value="48">48小时内</option>
-         <option value="72">72小时内</option>
+         <option value="72" selected="selected">72小时内</option>
           <option value="120">5天内</option>
             <option value="168">7天内</option>
               <option value="360">15天内</option>
                 <option value="630">30天内</option>    <option value="960">40天内</option>
                 
      </select>
-     	
+     	承诺买家付款后该时间内录入物流信息并发货，以物流信息收单信息为准 。
      </td>
          </tr>
             <tr>
      <th class="w100">是否包邮:</th>
      <td>
-     	 <input  name="shopAddr" type="radio" value="" class="input_a1" checked="checked"/>买家承担运费 <input  name="shopAddr" type="radio" value="" class="input_a1" />卖家承担运费
+     	 <input  name="shopAddr" type="radio" value="1" class="input_a1" checked="checked"/>买家承担运费 <input  name="shopAddr" type="radio" value="2" class="input_a1" />卖家承担运费
      </td>
          </tr>
                  <tr>
@@ -162,17 +183,17 @@ html { overflow:-moz-scrollbars-vertical;}
      <td>
      请选择并添加运费方式(提示：除指定地区外，其余地区的运费采用“默认运费”)：<br/>
      
-     	 <input  type="checkbox" value="" class="input_a1" />平邮
-     	 <div id="mailMode">首件(重(kg)或体积( m³))：<input  type="text" value="" class="input_a1" />，首费<input  type="text" value="0.0" class="input_a1" />元，继件(重或体积)<br/>
+     	 <input  type="checkbox" name="mailCheckbox"  class="input_a1" onclick="mailCheckboxOnclick(this)"/>平邮
+     	 <div id="mailMode" style="display:none;">首件(重(kg)或体积( m³))：<input  type="text" name="mailDefalutFirst" value="" class="input_a1" />，首费<input   name="mailDefalutFirstAmount" type="text" value="0.0" class="input_a1" />元，继件(重或体积)<input name="mailDefalutSecond" type="text" value="0.0" class="input_a1" />，增加运费<input name="mailDefalutSecondAmount"  type="text" value="0.0" class="input_a1" />元<br/>
      	  <input  type="button" value="为指定地区设置运费" class="input_a1" onclick="addMailTr()"/>
      	 <table width="100%"><thead><tr><th>运送地区</th><th>首件(重(kg)或体积( m³))</th><th>首费(元)</th><th>继件(重或体积)</th><th>继费</th><th>操作</th></tr></thead>
      	 <tbody id="mailBody">
 											
 		</tbody>
      	 </table>
-     	 </div>
-     	 <input  type="checkbox" value="" class="input_a1" />快递公司
-     	  <div id="expressMode">首件(重(kg)或体积( m³))：<input  type="text" value="" class="input_a1" />，首费<input  type="text" value="0.0" class="input_a1" />元，继件(重或体积)<br/>
+     	 </div><br/>
+     	 <input  type="checkbox" name="expressCheckbox" class="input_a1" onclick="expressCheckboxOnclick(this)"/>快递公司
+     	  <div id="expressMode" style="display:none;" >首件(重(kg)或体积( m³))：<input  type="text" name="expressDefalutFirst" value="" class="input_a1" />，首费<input   name="expressDefalutFirstAmount" type="text" value="0.0" class="input_a1" />元，继件(重或体积)<input name="expressDefalutSecond" type="text" value="0.0" class="input_a1" />，增加运费<input name="expressDefalutSecondAmount"  type="text" value="0.0" class="input_a1" />元<br/>
      	  <input  type="button" value="为指定地区设置运费" class="input_a1" onclick="addExpressTr()" />
      	   <table width="100%"><thead><tr><th>运送地区</th><td>首件(重(kg)或体积( m³))</td><td>首费(元)</td><td>继件(重或体积)</td><td>继费</td><td>操作</td></tr></thead>
      	 <tbody id="expressBody">
@@ -180,8 +201,9 @@ html { overflow:-moz-scrollbars-vertical;}
 		</tbody>
 		</table>
      	 </div>
-     	 <input  type="checkbox" value="" class="input_a1" />EMS
-     	  <div id="emsMode">首件(重(kg)或体积( m³))：<input  type="text" value="" class="input_a1" />，首费<input  type="text" value="0.0" class="input_a1" />元，继件(重或体积)<br/>
+     	 <br/>
+     	 <input  type="checkbox" name="emsCheckbox" class="input_a1" onclick="emsCheckboxOnclick(this)"/>EMS
+     	  <div id="emsMode" style="display:none;" >首件(重(kg)或体积( m³))：<input  type="text" name="emsDefalutFirst" value="" class="input_a1" />，首费<input   name="emsDefalutFirstAmount" type="text" value="0.0" class="input_a1" />元，继件(重或体积)<input name="emsDefalutSecond" type="text" value="0.0" class="input_a1" />，增加运费<input name="emsDefalutSecondAmount"  type="text" value="0.0" class="input_a1" />元<br/>
      	  <input  type="button" value="为指定地区设置运费" class="input_a1" onclick="addEmsTr()"/>
      	    <table width="100%"><thead><tr><td>运送地区</td><td>首件(重(kg)或体积( m³))</td><td>首费(元)</td><td>继件(重或体积)</td><td>继费</td><td>操作</td></tr></thead>
      	 <tbody id="emsBody">

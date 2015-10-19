@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,22 @@ public class  FareTemplateController extends BaseController {
 	  @RequestMapping(value = ADD)
 		public String add() {
 		 
+		  
+			return "admin/member/FareTemplateA_U";
+		}
+	  @RequestMapping(value = SAVE)
+		public String save(HttpServletRequest request) {
+		  Enumeration<String> paraNames=request.getParameterNames();
+		  for(Enumeration e=paraNames;e.hasMoreElements();){
+		   
+		         String thisName=e.nextElement().toString();
+		         
+		         String thisValue=request.getParameter(thisName);
+		         System.out.println(thisName+"--------------"+thisValue);
+		   
+		  }
+
+		  
 		  
 			return "admin/member/FareTemplateA_U";
 		}
