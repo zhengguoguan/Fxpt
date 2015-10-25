@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -38,6 +39,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.armysoft.fxpt.model.Address;
 import com.armysoft.fxpt.model.Cars;
 import com.armysoft.fxpt.model.CdCategories;
+import com.armysoft.fxpt.model.FareCarryMode;
+import com.armysoft.fxpt.model.FareTemplate;
 import com.armysoft.fxpt.model.Orders;
 import com.armysoft.fxpt.pojo.JsApiTicket;
 import com.armysoft.fxpt.pojo.SNSUserInfo;
@@ -45,6 +48,8 @@ import com.armysoft.fxpt.pojo.Token;
 import com.armysoft.fxpt.service.member.AddressService;
 import com.armysoft.fxpt.service.member.CarsService;
 import com.armysoft.fxpt.service.member.CdInformationService;
+import com.armysoft.fxpt.service.member.FareCarryModeService;
+import com.armysoft.fxpt.service.member.FareTemplateService;
 import com.armysoft.fxpt.service.member.OrdersDetailService;
 import com.armysoft.fxpt.service.member.OrdersService;
 import com.armysoft.fxpt.wechatpay.CommonUtil;
@@ -61,10 +66,9 @@ import com.armysoft.fxpt.wechatpay.XMLUtil;
 public class  FareTemplateController extends BaseController {
 	
 	@Resource
-	private OrdersDetailService ordersDetailService;
+	private FareTemplateService fareTemplateService;
 	@Resource
-	private OrdersService ordersService;
-
+	private FareCarryModeService fareCarryModeService;
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -86,7 +90,7 @@ public class  FareTemplateController extends BaseController {
 			params.put("payType", payType);
 			params.put("orderId", orderId);
 			
-			model.addAttribute("list", ordersService.getByPage(params, pager));
+		//	model.addAttribute("list", ordersService.getByPage(params, pager));
 			model.addAttribute("page", pager);
 			model.addAttribute("params", params);
 			return "admin/member/OrderQ";
@@ -98,29 +102,26 @@ public class  FareTemplateController extends BaseController {
 			return "admin/member/FareTemplateA_U";
 		}
 	  @RequestMapping(value = SAVE)
-		public String save(HttpServletRequest request) {
-		  Enumeration<String> paraNames=request.getParameterNames();
-		  for(Enumeration e=paraNames;e.hasMoreElements();){
-		   
-		         String thisName=e.nextElement().toString();
-		         
-		         String thisValue=request.getParameter(thisName);
-		         System.out.println(thisName+"--------------"+thisValue);
-		   
-		  }
-
+		public String save(HttpServletRequest request,FareTemplate fareTemplate,String mailCheckbox,String expressCheckbox,String emsCheckbox) {
+		 //让运费模版与运费方式处于同一事务中
+		  fareTemplateService.batchInsert( request, fareTemplate, mailCheckbox, expressCheckbox, emsCheckbox);
 		  
 		  
 			return "admin/member/FareTemplateA_U";
 		}
-	  
+	  @RequestMapping(value = "citySelected")
+		public String citySelected(String addrId,Model model) {
+		  model.addAttribute("addrId", addrId);
+		
+			return "admin/member/CitySelectedLayer";
+		}
 	  
 	  /**
 	   * 取消订单
 	   * @param key
 	   * @return
 	   */
-	  @RequestMapping(value = DELETE)
+	/*  @RequestMapping(value = DELETE)
 		public String delete(@PathVariable("id") Long key) {
 		 
 		  ordersService.delete(key);
@@ -131,6 +132,6 @@ public class  FareTemplateController extends BaseController {
 		  model.addAttribute("model", ordersService.findByKey(key));
 		  return "admin/member/OrderD";
 		}
-	  
+	  */
 	
 }

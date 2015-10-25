@@ -32,7 +32,7 @@
 		</if>
 		order by a.PreTime desc,a.AfterTime desc
    </sql>
-	<!-- 实体映射 -->
+	<!-- 实体映射 --><!--
 	<resultMap id="ordersMap" type="Orders">
 				<result column="ID" property="id" />
 				<result column="Money" property="money" />
@@ -46,7 +46,7 @@
 			</resultMap>
   	
 		
-    <select id="findById" resultType="java.util.Map" parameterType="Long">
+    --><select id="findById" resultType="java.util.Map" parameterType="Long">
 		select * from orders where ID = #{id}
 	</select>
 	 <select id="findByOrderId" resultType="java.util.Map" parameterType="String">

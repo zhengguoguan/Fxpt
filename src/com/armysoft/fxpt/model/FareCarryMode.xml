@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FareCarryModeOpt">
+
+	<!-- 保存 -->
+	<insert id="batchInsert"  parameterType="java.util.List">
+	
+			insert into fare_carry_mode(FareId,Region,FirstPiece,FirstWeight,FirstBulk,
+			FirstAmount,SecondPiece,SecondWeight,SecondBulk,SecondAmount,CarryWay,IsDefault)
+		values
+		
+		
+		<foreach collection="list" item="item" index="index" separator="," >  
+        		(#{item.fareId} 		
+		, #{item.region} 
+		, #{item.firstPiece} 
+		, #{item.firstWeight} 
+		, #{item.firstBulk} 
+		, #{item.firstAmount} 
+		, #{item.secondPiece} 
+		, #{item.secondWeight} 
+		, #{item.secondBulk} 
+		, #{item.secondAmount} 
+		, #{item.carryWay} 
+		, #{item.isDefault} 
+		  )
+    	</foreach>  
+    	
+	
+		
+	
+		</insert>
+
+	
+
+</mapper>

@@ -4,7 +4,7 @@ public class FareCarryMode {
 	private Integer id; 
 	private Integer fareId ; //模板表外键
 	private String region ; //运送地区(存id,格式为'省-市-区',以'|'分隔)
-	private Integer firstPiece ;
+	private Float firstPiece ;
 	private Float firstWeight ;
 	private Float firstBulk ;
 	private Float firstAmount ; //首费
@@ -15,6 +15,47 @@ public class FareCarryMode {
 	private Integer carryWay  ;    //运送方式（赣农速运,ems,顺丰，天天）
 	
 	private Integer isDefault   ; //是否默认的运送方式
+    public FareCarryMode(){}
+    
+	public FareCarryMode(Integer fareId, String region, Float firstPiece,
+			Float firstWeight, Float firstBulk, Float firstAmount,
+			Float secondPiece, Float secondWeight, Float secondBulk,
+			Float secondAmount, Integer carryWay, Integer isDefault) {
+		super();
+		this.fareId = fareId;
+		this.region = region;
+		this.firstPiece = firstPiece;
+		this.firstWeight = firstWeight;
+		this.firstBulk = firstBulk;
+		this.firstAmount = firstAmount;
+		this.secondPiece = secondPiece;
+		this.secondWeight = secondWeight;
+		this.secondBulk = secondBulk;
+		this.secondAmount = secondAmount;
+		this.carryWay = carryWay;
+		this.isDefault = isDefault;
+	}
+    
+	public FareCarryMode(Integer fareId, String region, Integer valuationModel,Float first,Float second,
+			Float firstAmount,Float secondAmount, Integer carryWay, Integer isDefault) {
+		super();
+		this.fareId = fareId;
+		this.region = region;
+		this.firstAmount = firstAmount;
+		this.secondAmount = secondAmount;
+		if(valuationModel==1){
+			this.firstPiece =first ;
+			this.secondPiece = second;
+		}else if(valuationModel==2){
+			this.firstWeight = first;
+			this.secondWeight = second;
+		}else if(valuationModel==3){
+			this.firstBulk = first;
+			this.secondBulk = second;
+		}
+		this.carryWay = carryWay;
+		this.isDefault = isDefault;
+	}
 
 	public Integer getId() {
 		return id;
@@ -40,11 +81,11 @@ public class FareCarryMode {
 		this.region = region;
 	}
 
-	public Integer getFirstPiece() {
+	public Float getFirstPiece() {
 		return firstPiece;
 	}
 
-	public void setFirstPiece(Integer firstPiece) {
+	public void setFirstPiece(Float firstPiece) {
 		this.firstPiece = firstPiece;
 	}
 
