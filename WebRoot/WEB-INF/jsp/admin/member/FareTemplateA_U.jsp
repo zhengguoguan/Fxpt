@@ -16,121 +16,17 @@
 
 <script type="text/javascript" src="${ctx}/js/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" >
 var mypop ;
 $(window).bind('resize', function (){
 	 var wh=$(window).height();
 		var ww=$(window).width();
-	 layer.area(mypop, {width:ww-50, height:  wh-50});
+	try{ 
+		layer.area(mypop, {width:ww-50, height:  wh-50});
+	}catch(e){}
 	  });
-function showLayer(url,addrId){
-	url=url+"?addrId="+addrId
-	 var wh=$(window).height();
-		var ww=$(window).width();
-		 mypop = $.layer({
-		    type: 2,
-		    title : false,
-		    border: [10, 0.4, 'black',true],
-		    closeBtn: [1, true],
-		    iframe: {src : url},
-		    move: false,
-		    area: [ww-50, wh-50],
-		    offset: ['20px', ''], //上下垂直居中
-		    close: function(index){
-		    	layer.close(index);
-		    
-		    }
-		});
-
-}
-function selectAddr(addrString,addrId){
-	$("#"+addrId).val(addrString);
-}
-////////////////平邮/////////////////
-function mailCheckboxOnclick(obj){
-	if(obj.checked){
-		$("#mailMode").css("display","");
-		}else{
-			$("#mailMode").css("display","none");
-			}
-}
-function deleteMailTr(no){
-	 $("#trMail"+no).remove();
-	// trMailCount=trMailCount-1;
-}
-var trMailNo=0;
-//var trMailCount=0;
-function addMailTr(){
-	var tbody = $("#mailBody"); 
-	trMailNo=trMailNo+1;
-	//trMailCount=trMailCount+1;
-	var newRow="<tr id=\"trMail"+trMailNo+"\"> ";
-	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"mailRegion"+trMailNo+"\" id=\"mailRegion"+trMailNo+"\" type=\"text\"   class=\"input_a1\" /> <a href=\"javascript:void(0);\" onclick=\"showLayer('${ctx}/admin/fareTemplate/citySelected.html','mailRegion"+trMailNo+"')\">编辑</a></td>");
-	newRow=newRow.concat("<td><input name=\"mailFirst"+trMailNo+"\" type=\"text\"  value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"mailFirstAmount"+trMailNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" />  </td>");
-	newRow=newRow.concat("<td> <input name=\"mailSecond"+trMailNo+"\" type=\"text\" value=\"1\"  class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"mailSecondAmount"+trMailNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><a href=\"javascript:void(0)\" onclick=\"deleteMailTr("+trMailNo+")\">删除</a> </td>");
-	newRow=newRow.concat("</tr>");
-	tbody.html(tbody.html().concat(newRow)); 
-}
-////////////////快递/////////////////
-function expressCheckboxOnclick(obj){
-	if(obj.checked){
-		$("#expressMode").css("display","");
-		}else{
-			$("#expressMode").css("display","none");
-			}
-}
-function deleteExpressTr(no){
-	 $("#trExpress"+no).remove();
-	 //trMailCount=trMailCount-1;
-}
-var trExpressNo=0;
-//var trMailCount=0;
-function addExpressTr(){
-	var tbody = $("#expressBody"); 
-	trExpressNo=trExpressNo+1;
-	//trMailCount=trMailCount+1;
-	var newRow="<tr id=\"trExpress"+trExpressNo+"\"> ";
-	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"expressRegion"+trExpressNo+"\" id=\"expressRegion"+trExpressNo+"\"  type=\"text\"   class=\"input_a1\" /><a href=\"javascript:void(0);\" onclick=\"showLayer('${ctx}/admin/fareTemplate/citySelected.html','expressRegion"+trExpressNo+"')\">编辑</a> </td>");
-	newRow=newRow.concat("<td><input name=\"expressFirst"+trExpressNo+"\" type=\"text\" value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"expressFirstAmount"+trExpressNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" />  </td>");
-	newRow=newRow.concat("<td> <input name=\"expressSecond"+trExpressNo+"\" type=\"text\" value=\"1\"  class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"expressSecondAmount"+trExpressNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><a href=\"javascript:void(0)\" onclick=\"deleteExpressTr("+trExpressNo+")\">删除</a> </td>");
-	newRow=newRow.concat("</tr>");
-	tbody.html(tbody.html().concat(newRow)); 
-}
-////////////////EMS/////////////////
-function emsCheckboxOnclick(obj){
-	if(obj.checked){
-		$("#emsMode").css("display","");
-		}else{
-			$("#emsMode").css("display","none");
-			}
-}
-function deleteEmsTr(no){
-	 $("#trEms"+no).remove();
-	// trMailCount=trMailCount-1;
-}
-var trEmsNo=0;
-//var trMailCount=0;
-function addEmsTr(){
-	var tbody = $("#emsBody"); 
-	trEmsNo=trEmsNo+1;
-	//trMailCount=trMailCount+1;
-	var newRow="<tr id=\"trEms"+trEmsNo+"\"> ";
-	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"emsRegion"+trEmsNo+"\" id=\"emsRegion"+trEmsNo+"\" type=\"text\"   class=\"input_a1\" /> <a href=\"javascript:void(0);\" onclick=\"showLayer('${ctx}/admin/fareTemplate/citySelected.html','emsRegion"+trEmsNo+"')\">编辑</a></td>");
-	newRow=newRow.concat("<td><input name=\"emsFirst"+trEmsNo+"\" type=\"text\" value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"emsFirstAmount"+trEmsNo+"\" type=\"text\" value=\"\" class=\"input_a1\" />  </td>");
-	newRow=newRow.concat("<td> <input name=\"emslSecond"+trEmsNo+"\" type=\"text\"  value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"emsSecondAmount"+trEmsNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><a href=\"javascript:void(0)\" onclick=\"deleteEmsTr("+trEmsNo+")\">删除</a> </td>");
-	newRow=newRow.concat("</tr>");
-	tbody.html(tbody.html().concat(newRow)); 
-}
 </script>
+<script type="text/javascript" src="${ctx}/theme/admin/member/FareTemplateA_U.js"></script>
 <style type="text/css">
 html { overflow:-moz-scrollbars-vertical;}
 </style>
@@ -142,7 +38,7 @@ html { overflow:-moz-scrollbars-vertical;}
 
 
 <div class="admin_table">
-<form id="add_form" action="${ctx }/admin/fareTemplate/save.html" method="post">
+<form id="add_form" action="${ctx }/admin/fareTemplate/save.html" method="post" onsubmit="return onsubmitClick();">
 
   <div class="add_info">
 
@@ -197,34 +93,14 @@ html { overflow:-moz-scrollbars-vertical;}
      请选择并添加运费方式(提示：除指定地区外，其余地区的运费采用“默认运费”)：<br/>
      
      	 <input  type="checkbox" name="mailCheckbox"  class="input_a1" onclick="mailCheckboxOnclick(this)"/>平邮
-     	 <div id="mailMode" style="display:none;">首件(重(kg)或体积( m³))：<input  type="text" name="mailDefalutFirst" value="1" class="input_a1" size="10px" />，首费<input   name="mailDefalutFirstAmount" type="text" value="" class="input_a1" size="10px"/>元，继件(重或体积)<input name="mailDefalutSecond" type="text" value="1" class="input_a1" size="10px"/>，增加运费<input name="mailDefalutSecondAmount"  type="text" value="0.0" class="input_a1" size="10px"/>元<br/>
-     	  <a href="javascript:void(0)" onclick="addMailTr()">为指定地区设置运费</a>
-     	 <table width="100%"><thead><tr><th>运送地区</th><th>首件(重(kg)或体积( m³))</th><th>首费(元)</th><th>继件(重或体积)</th><th>继费</th><th>操作</th></tr></thead>
-     	 <tbody id="mailBody">
-											
-		</tbody>
-     	 </table>
+     	 <div id="mailMode" >
      	 </div><br/>
      	 <input  type="checkbox" name="expressCheckbox" class="input_a1" onclick="expressCheckboxOnclick(this)"/>快递公司
-     	  <div id="expressMode" style="display:none;" >首件(重(kg)或体积( m³))：<input  type="text" name="expressDefalutFirst" value="1" class="input_a1" size="10px" />，首费<input   name="expressDefalutFirstAmount" type="text" value="" class="input_a1" size="10px"/>元，继件(重或体积)<input name="expressDefalutSecond" type="text" value="1" class="input_a1" size="10px"/>，增加运费<input name="expressDefalutSecondAmount"  type="text" value="0.0" class="input_a1" size="10px" />元<br/>
-     	
-     	  <a href="javascript:void(0)" onclick="addExpressTr()">为指定地区设置运费</a>
-     	   <table width="100%"><thead><tr><th>运送地区</th><td>首件(重(kg)或体积( m³))</td><td>首费(元)</td><td>继件(重或体积)</td><td>继费</td><td>操作</td></tr></thead>
-     	 <tbody id="expressBody">
-											
-		</tbody>
-		</table>
+     	  <div id="expressMode" >
      	 </div>
      	 <br/>
      	 <input  type="checkbox" name="emsCheckbox" class="input_a1" onclick="emsCheckboxOnclick(this)"/>EMS
-     	  <div id="emsMode" style="display:none;" >首件(重(kg)或体积( m³))：<input  type="text" name="emsDefalutFirst" value="1" class="input_a1" size="10px"/>，首费<input   name="emsDefalutFirstAmount" type="text" value="" class="input_a1" size="10px"/>元，继件(重或体积)<input name="emsDefalutSecond" type="text" value="1" class="input_a1" size="10px"/>，增加运费<input name="emsDefalutSecondAmount"  type="text" value="" class="input_a1" size="10px"/>元<br/>
-     	 
-     	   <a href="javascript:void(0)" onclick="addEmsTr()">为指定地区设置运费</a>
-     	    <table width="100%"><thead><tr><td>运送地区</td><td>首件(重(kg)或体积( m³))</td><td>首费(元)</td><td>继件(重或体积)</td><td>继费</td><td>操作</td></tr></thead>
-     	 <tbody id="emsBody">
-											
-		</tbody>
-		</table>
+     	  <div id="emsMode"  >
      	 </div>
      </td>
          </tr>
@@ -234,7 +110,7 @@ html { overflow:-moz-scrollbars-vertical;}
        <div class="div_submit">
 					<input id="sumbit_bt" name="" type="submit" value="保存"
 						class="photo_btn" />
-					<input type="reset" value="返回" onclick="javascript:history.back(-1);"
+					<input type="reset" value="返回" onclick=""
 						class="photo_btn" />
 				</div>
   
