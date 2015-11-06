@@ -4,7 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="FareTemplateOpt">
-
+	<!-- 表列名 -->
+	<sql id="columns">	ID,Name,ShopAddr,DispatchTime,IsFreePostage,ValuationModel</sql>
+	<!-- 通用条件sql语句 -->
+	<sql id="condition" >
+		from fare_template 
+		where 1 = 1
+		<if test="parm.name != null and parm.name != ''">
+		and Name like CONCAT('%', #{parm.name}, '%')
+		</if>
+		
+		<if test="parm.shopAddr != null and parm.shopAddr != ''">
+		and ShopAddr  like CONCAT('%', #{parm.shopAddr}, '%')
+		</if>
+	
+		order by Name
+   </sql>
+   	<select id="page" resultType="java.util.Map" parameterType="java.util.Map">
+		select 
+		<include refid="columns"/>
+		<include refid="condition" />
+		limit #{pager.startRowNumber}, #{pager.pageSize}
+	</select>
+	<select id="pageCount" resultType="int" parameterType="java.util.Map">
+		select count(*) 
+		<include refid="condition" />
+	</select>
+	<select id="findById" resultType="java.util.Map" parameterType="Long">
+		select * from fare_template where ID = #{id}
+	</select>
 	<!-- 保存 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="fareTemplate">
 	
@@ -18,7 +46,9 @@
 		
 	
 		</insert>
-
+	<delete id="delete" parameterType="Long">
+		delete from fare_template  where ID = #{id}
+	</delete>
 	
 
 </mapper>

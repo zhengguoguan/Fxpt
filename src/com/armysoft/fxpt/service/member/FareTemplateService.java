@@ -66,7 +66,9 @@ public class FareTemplateService extends BaseDao {
 		fareCarryModeService.batchInsert(list);
 	}
 
-
+	public Map<String, Object> findByKey(Long id) {
+		return super.nativeSelectOne(nameSpace + ".findById", id);
+	}
 	/**
 	 * 添加数据
 	 * @param question

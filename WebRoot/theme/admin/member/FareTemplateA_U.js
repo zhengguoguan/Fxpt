@@ -25,7 +25,7 @@ function selectAddr(addrString,addrId){
 ////////////////平邮/////////////////
 function mailCheckboxOnclick(obj){
 	if(obj.checked){
-		var tempText="首件(重(kg)或体积( m³))：<input  type=\"text\" name=\"mailDefalutFirst\" value=\"1\" class=\"input_a1\" size=\"10px\" />，首费<input   name=\"mailDefalutFirstAmount\" type=\"text\" value=\"\" class=\"input_a1\" size=\"10px\"/>元，继件(重或体积)<input name=\"mailDefalutSecond\" type=\"text\" value=\"1\" class=\"input_a1\" size=\"10px\"/>，增加运费<input name=\"mailDefalutSecondAmount\"  type=\"text\" value=\"0.0\" class=\"input_a1\" size=\"10px\"/>元<br/>";
+		var tempText="首件(重(kg)或体积( m³))：<input  type=\"text\" name=\"mailDefalutFirst\" value=\"1\" class=\"input_a1\" size=\"10px\" />，首费<input   name=\"mailDefalutFirstAmount\" type=\"text\" value=\"0\" class=\"input_a1\" size=\"10px\"/>元，继件(重或体积)<input name=\"mailDefalutSecond\" type=\"text\" value=\"1\" class=\"input_a1\" size=\"10px\"/>，增加运费<input name=\"mailDefalutSecondAmount\"  type=\"text\" value=\"0.0\" class=\"input_a1\" size=\"10px\"/>元<br/>";
 		tempText+="  <a href=\"javascript:void(0)\" onclick=\"addMailTr()\">为指定地区设置运费</a>";
 		tempText+=" <table width=\"100%\"><thead><tr><th>运送地区</th><th>首件(重(kg)或体积( m³))</th><th>首费(元)</th><th>继件(重或体积)</th><th>继费</th><th>操作</th></tr></thead>";
 		tempText+=" <tbody id=\"bodyMail\">";											
@@ -47,11 +47,11 @@ function addMailTr(){
 	trMailNo=trMailNo+1;
 	//trMailCount=trMailCount+1;
 	var newRow="<tr id=\"trMail"+trMailNo+"\"> ";
-	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"mailRegion"+trMailNo+"\" id=\"mailRegion"+trMailNo+"\" type=\"text\"   class=\"input_a1\" /> <a href=\"javascript:void(0);\" onclick=\"showLayer('${ctx}/admin/fareTemplate/citySelected.html','mailRegion"+trMailNo+"')\">编辑</a></td>");
+	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"mailRegion"+trMailNo+"\" value=\"广东省-广州市\" id=\"mailRegion"+trMailNo+"\" type=\"text\"   class=\"input_a1\" /> <a href=\"javascript:void(0);\" onclick=\"showLayer('"+ctx+"/admin/fareTemplate/citySelected.html','mailRegion"+trMailNo+"')\">编辑</a></td>");
 	newRow=newRow.concat("<td><input name=\"mailFirst"+trMailNo+"\" type=\"text\"  value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"mailFirstAmount"+trMailNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" />  </td>");
+	newRow=newRow.concat("<td><input name=\"mailFirstAmount"+trMailNo+"\" type=\"text\" value=\"0\"  class=\"input_a1\" />  </td>");
 	newRow=newRow.concat("<td> <input name=\"mailSecond"+trMailNo+"\" type=\"text\" value=\"1\"  class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"mailSecondAmount"+trMailNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" /> </td>");
+	newRow=newRow.concat("<td><input name=\"mailSecondAmount"+trMailNo+"\" type=\"text\" value=\"0\"  class=\"input_a1\" /> </td>");
 	newRow=newRow.concat("<td><a href=\"javascript:void(0)\" onclick=\"deleteMailTr("+trMailNo+")\">删除</a> </td>");
 	newRow=newRow.concat("</tr>");
 	tbody.html(tbody.html().concat(newRow)); 
@@ -59,7 +59,7 @@ function addMailTr(){
 ////////////////快递/////////////////
 function expressCheckboxOnclick(obj){
 	if(obj.checked){
-		var tempText="首件(重(kg)或体积( m³))：<input  type=\"text\" name=\"expressDefalutFirst\" value=\"1\" class=\"input_a1\" size=\"10px\" />，首费<input   name=\"expressDefalutFirstAmount\" type=\"text\" value=\"\" class=\"input_a1\" size=\"10px\"/>元，继件(重或体积)<input name=\"expressDefalutSecond\" type=\"text\" value=\"1\" class=\"input_a1\" size=\"10px\"/>，增加运费<input name=\"expressDefalutSecondAmount\"  type=\"text\" value=\"0.0\" class=\"input_a1\" size=\"10px\" />元<br/>";
+		var tempText="首件(重(kg)或体积( m³))：<input  type=\"text\" name=\"expressDefalutFirst\" value=\"1\" class=\"input_a1\" size=\"10px\" />，首费<input   name=\"expressDefalutFirstAmount\" type=\"text\" value=\"0\" class=\"input_a1\" size=\"10px\"/>元，继件(重或体积)<input name=\"expressDefalutSecond\" type=\"text\" value=\"1\" class=\"input_a1\" size=\"10px\"/>，增加运费<input name=\"expressDefalutSecondAmount\"  type=\"text\" value=\"0.0\" class=\"input_a1\" size=\"10px\" />元<br/>";
      	
 		tempText+=" <a href=\"javascript:void(0)\" onclick=\"addExpressTr()\">为指定地区设置运费</a>";
 		tempText+=" <table width=\"100%\"><thead><tr><th>运送地区</th><th>首件(重(kg)或体积( m³))</th><th>首费(元)</th><th>继件(重或体积)</th><th>继费</th><th>操作</th></tr></thead>";
@@ -81,11 +81,11 @@ function addExpressTr(){
 	trExpressNo=trExpressNo+1;
 	//trMailCount=trMailCount+1;
 	var newRow="<tr id=\"trExpress"+trExpressNo+"\"> ";
-	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"expressRegion"+trExpressNo+"\" id=\"expressRegion"+trExpressNo+"\"  type=\"text\"   class=\"input_a1\" /><a href=\"javascript:void(0);\" onclick=\"showLayer('${ctx}/admin/fareTemplate/citySelected.html','expressRegion"+trExpressNo+"')\">编辑</a> </td>");
+	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"expressRegion"+trExpressNo+"\" value=\"广东省-广州市\" id=\"expressRegion"+trExpressNo+"\"  type=\"text\"   class=\"input_a1\" /><a href=\"javascript:void(0);\" onclick=\"showLayer('"+ctx+"/admin/fareTemplate/citySelected.html','expressRegion"+trExpressNo+"')\">编辑</a> </td>");
 	newRow=newRow.concat("<td><input name=\"expressFirst"+trExpressNo+"\" type=\"text\" value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"expressFirstAmount"+trExpressNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" />  </td>");
+	newRow=newRow.concat("<td><input name=\"expressFirstAmount"+trExpressNo+"\" type=\"text\" value=\"0\"  class=\"input_a1\" />  </td>");
 	newRow=newRow.concat("<td> <input name=\"expressSecond"+trExpressNo+"\" type=\"text\" value=\"1\"  class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"expressSecondAmount"+trExpressNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" /> </td>");
+	newRow=newRow.concat("<td><input name=\"expressSecondAmount"+trExpressNo+"\" type=\"text\" value=\"0\"  class=\"input_a1\" /> </td>");
 	newRow=newRow.concat("<td><a href=\"javascript:void(0)\" onclick=\"deleteExpressTr("+trExpressNo+")\">删除</a> </td>");
 	newRow=newRow.concat("</tr>");
 	tbody.html(tbody.html().concat(newRow)); 
@@ -93,7 +93,7 @@ function addExpressTr(){
 ////////////////EMS/////////////////
 function emsCheckboxOnclick(obj){
 	if(obj.checked){
-var tempText="首件(重(kg)或体积( m³))：<input  type=\"text\" name=\"emsDefalutFirst\" value=\"1\" class=\"input_a1\" size=\"10px\" />，首费<input   name=\"emsDefalutFirstAmount\" type=\"text\" value=\"\" class=\"input_a1\" size=\"10px\"/>元，继件(重或体积)<input name=\"emsDefalutSecond\" type=\"text\" value=\"1\" class=\"input_a1\" size=\"10px\"/>，增加运费<input name=\"emsDefalutSecondAmount\"  type=\"text\" value=\"0.0\" class=\"input_a1\" size=\"10px\" />元<br/>";
+var tempText="首件(重(kg)或体积( m³))：<input  type=\"text\" name=\"emsDefalutFirst\" value=\"1\" class=\"input_a1\" size=\"10px\" />，首费<input   name=\"emsDefalutFirstAmount\" type=\"text\" value=\"0\" class=\"input_a1\" size=\"10px\"/>元，继件(重或体积)<input name=\"emsDefalutSecond\" type=\"text\" value=\"1\" class=\"input_a1\" size=\"10px\"/>，增加运费<input name=\"emsDefalutSecondAmount\"  type=\"text\" value=\"0.0\" class=\"input_a1\" size=\"10px\" />元<br/>";
      	
 		tempText+=" <a href=\"javascript:void(0)\" onclick=\"addEmsTr()\">为指定地区设置运费</a>";
 		tempText+=" <table width=\"100%\"><thead><tr><th>运送地区</th><th>首件(重(kg)或体积( m³))</th><th>首费(元)</th><th>继件(重或体积)</th><th>继费</th><th>操作</th></tr></thead>";
@@ -115,17 +115,28 @@ function addEmsTr(){
 	trEmsNo=trEmsNo+1;
 	//trMailCount=trMailCount+1;
 	var newRow="<tr id=\"trEms"+trEmsNo+"\"> ";
-	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"emsRegion"+trEmsNo+"\" id=\"emsRegion"+trEmsNo+"\" type=\"text\"   class=\"input_a1\" /> <a href=\"javascript:void(0);\" onclick=\"showLayer('${ctx}/admin/fareTemplate/citySelected.html','emsRegion"+trEmsNo+"')\">编辑</a></td>");
+	newRow=newRow.concat("<td><input readonly=\"readonly\" name=\"emsRegion"+trEmsNo+"\" value=\"广东省-广州市\" id=\"emsRegion"+trEmsNo+"\" type=\"text\"   class=\"input_a1\" /> <a href=\"javascript:void(0);\" onclick=\"showLayer('"+ctx+"/admin/fareTemplate/citySelected.html','emsRegion"+trEmsNo+"')\">编辑</a></td>");
 	newRow=newRow.concat("<td><input name=\"emsFirst"+trEmsNo+"\" type=\"text\" value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"emsFirstAmount"+trEmsNo+"\" type=\"text\" value=\"\" class=\"input_a1\" />  </td>");
+	newRow=newRow.concat("<td><input name=\"emsFirstAmount"+trEmsNo+"\" type=\"text\" value=\"0\" class=\"input_a1\" />  </td>");
 	newRow=newRow.concat("<td> <input name=\"emslSecond"+trEmsNo+"\" type=\"text\"  value=\"1\" class=\"input_a1\" /> </td>");
-	newRow=newRow.concat("<td><input name=\"emsSecondAmount"+trEmsNo+"\" type=\"text\" value=\"\"  class=\"input_a1\" /> </td>");
+	newRow=newRow.concat("<td><input name=\"emsSecondAmount"+trEmsNo+"\" type=\"text\" value=\"0\"  class=\"input_a1\" /> </td>");
 	newRow=newRow.concat("<td><a href=\"javascript:void(0)\" onclick=\"deleteEmsTr("+trEmsNo+")\">删除</a> </td>");
 	newRow=newRow.concat("</tr>");
 	tbody.html(tbody.html().concat(newRow)); 
 }
 //验证输入框的值
 function onsubmitClick(){
+	if($("#name").val()==""){
+		alert("模版名称不为空!");
+		$("#name").focus();
+		return false;
+	}
+	if($("#shopAddr").val()==""){
+		alert("宝贝地址不为空,请编辑地址");
+		$("#shopAddr").focus();
+		return false;
+	}
+	
 	var nameList=new Array("mail","express","ems");
 	var onReturn=true;
 	for(var i = 0;i < nameList.length; i++) {
@@ -133,17 +144,19 @@ function onsubmitClick(){
 			 break;
 		}
 		  $(":text[name^='"+nameList[i]+"']").each(function(){
-			
+			if($(this).attr("name").indexof("Region")>=0){
+				return true;  //相当于CONTINUE
+			}
 		       if(trim($(this).val())==""||isNaN($(this).val())){
 		    	   onReturn= false;
 		    	   alert("此处必须为数字");
 		    	   $(this).focus();
-		    	  return;
+		    	  return false;  //相当于BREAK
 		       }
 		    });
 		 
 		}
-	 return false;
+	 return onReturn;
 }
 function trim(str){ //删除左右两端的空格
     return str.replace(/(^\s*)|(\s*$)/g, "");

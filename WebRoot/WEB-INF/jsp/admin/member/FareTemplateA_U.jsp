@@ -17,7 +17,13 @@
 <script type="text/javascript" src="${ctx}/js/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="${ctx}/js/layer/layer.min.js"></script>
 <script type="text/javascript" >
+var ctx="${ctx}";
 var mypop ;
+$(document).ready(function(){
+$("#dispatchTime option[value='${model.DispatchTime}']").attr("selected", true);
+$("input[name='isFreePostage'][value='${model.IsFreePostage}']").attr("checked", "checked");
+$("input[name='valuationModel'][value='${model.ValuationModel}']").attr("checked", "checked");
+});
 $(window).bind('resize', function (){
 	 var wh=$(window).height();
 		var ww=$(window).width();
@@ -48,20 +54,26 @@ html { overflow:-moz-scrollbars-vertical;}
     <tr>
      <th class="w100" width="70px">模版名称:</th>
      <td>
-     	<input id="name" name="name" type="text" value="" class="input_a1"  />
+     	<input id="name" name="name" type="text" value="${model.Name}" class="input_a1"  />&nbsp;<font color="red">*</font>
      </td>
          </tr>
             <tr>
      <th class="w100">宝贝地址:</th>
      <td>
-     <input id="shopAddr" name="shopAddr" type="text" value="" class="input_a1" readonly="readonly" />(发货地址)<a href="javascript:void(0);" onclick="showLayer('${ctx}/admin/fareTemplate/citySelected.html','shopAddr')">编辑地址</a>
+     <c:if test="${model!=null}">
+     <input id="shopAddr" name="shopAddr" type="text" value="${model.ShopAddr}" class="input_a1" readonly="readonly" />
+     </c:if>
+     <c:if test="${model==null}">
+     <input id="shopAddr" name="shopAddr" type="text" value="${shopAddr}" class="input_a1" readonly="readonly" />
+     </c:if>
+     &nbsp;<font color="red">*</font>(发货地址)<a href="javascript:void(0);" onclick="showLayer('${ctx}/admin/fareTemplate/citySelected.html','shopAddr')">编辑地址</a>
      </td>
          </tr>
             <tr>
      <th class="w100">发货时间:</th>
      <td>
-     <select name="dispatchTime">
-     <option value="">请选择</option>
+     <select name="dispatchTime" id="dispatchTime">
+    
       <option value="12">12小时内</option>
        <option value="24">24小时内</option>
          <option value="48">48小时内</option>
@@ -71,7 +83,7 @@ html { overflow:-moz-scrollbars-vertical;}
               <option value="360">15天内</option>
                 <option value="630">30天内</option>    <option value="960">40天内</option>
                 
-     </select>
+     </select>&nbsp;<font color="red">*</font>
      	承诺买家付款后该时间内录入物流信息并发货，以物流信息收单信息为准 。
      </td>
          </tr>
@@ -90,10 +102,11 @@ html { overflow:-moz-scrollbars-vertical;}
                  <tr>
      <th class="w100">运送方式:</th>
      <td>
-     请选择并添加运费方式(提示：除指定地区外，其余地区的运费采用“默认运费”)：<br/>
+     请选择并添加运费方式(提示：除指定地区外，其余地区的运费采用“<b>默认运费</b>”)：<br/>
      
      	 <input  type="checkbox" name="mailCheckbox"  class="input_a1" onclick="mailCheckboxOnclick(this)"/>平邮
      	 <div id="mailMode" >
+     	 
      	 </div><br/>
      	 <input  type="checkbox" name="expressCheckbox" class="input_a1" onclick="expressCheckboxOnclick(this)"/>快递公司
      	  <div id="expressMode" >
@@ -110,7 +123,7 @@ html { overflow:-moz-scrollbars-vertical;}
        <div class="div_submit">
 					<input id="sumbit_bt" name="" type="submit" value="保存"
 						class="photo_btn" />
-					<input type="reset" value="返回" onclick=""
+					<input type="reset" value="返回" onclick="javascript:location.href='${ctx}/admin/fareTemplate/list/1.html'"
 						class="photo_btn" />
 				</div>
   

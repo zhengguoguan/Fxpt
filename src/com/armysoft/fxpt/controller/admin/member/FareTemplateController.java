@@ -78,27 +78,26 @@ public class  FareTemplateController extends BaseController {
 	}
 
 	  @RequestMapping(value = PAGE_LIST)    
-		public String getByPage(@PathVariable Integer currentPage,Model model,String tag,Date beginTime,Date endTime,String payType,
-			 String orderId,HttpServletRequest request) {
+		public String getByPage(@PathVariable Integer currentPage,Model model,String name,String provno,String cityno,HttpServletRequest request) {
 		  
 			Pagination pager = initPage(currentPage);
 			pager.setPageSize(10);
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("tag", tag);
-			params.put("beginTime", beginTime);
-			params.put("endTime", endTime);
-			params.put("payType", payType);
-			params.put("orderId", orderId);
+			params.put("name", name);
+			String p=provno!=null?provno+"省":"";
+			String c=cityno!=null?cityno+"市":"";
+			params.put("shopAddr",p+(c.equals("")==false?"-"+c:"") );
+		
 			
-		//	model.addAttribute("list", ordersService.getByPage(params, pager));
+			model.addAttribute("list", fareTemplateService.getByPage(params, pager));
 			model.addAttribute("page", pager);
 			model.addAttribute("params", params);
-			return "admin/member/OrderQ";
+			return "admin/member/FareTemplateQ";
 		}
 	  @RequestMapping(value = ADD)
-		public String add() {
-		 
-		  
+		public String add(Model model) {
+			model.addAttribute("shopAddr", "广东省-广州市");
+		
 			return "admin/member/FareTemplateA_U";
 		}
 	  @RequestMapping(value = SAVE)
@@ -107,7 +106,7 @@ public class  FareTemplateController extends BaseController {
 		  fareTemplateService.batchInsert( request, fareTemplate, mailCheckbox, expressCheckbox, emsCheckbox);
 		  
 		  
-			return "admin/member/FareTemplateA_U";
+			return "admin/member/FareTemplateQ";
 		}
 	  @RequestMapping(value = "citySelected")
 		public String citySelected(String addrId,Model model) {
@@ -115,23 +114,16 @@ public class  FareTemplateController extends BaseController {
 		
 			return "admin/member/CitySelectedLayer";
 		}
-	  
-	  /**
-	   * 取消订单
-	   * @param key
-	   * @return
-	   */
-	/*  @RequestMapping(value = DELETE)
-		public String delete(@PathVariable("id") Long key) {
-		 
-		  ordersService.delete(key);
-			return "redirect:/admin/order/list/1.html?tag=0";
-		}
 	  @RequestMapping(value = DETAIL)
 		public String detail(@PathVariable("id") Long key, Model model,HttpServletRequest request) {
-		  model.addAttribute("model", ordersService.findByKey(key));
-		  return "admin/member/OrderD";
+		  model.addAttribute("model", fareTemplateService.findByKey(key));
+		  return "admin/member/FareTemplateD";
 		}
-	  */
+	  @RequestMapping(value = DELETE)
+		public String delete(@PathVariable("id") Long key) {
+		 
+		  fareTemplateService.delete(key);
+			return "redirect:/admin/fareTemplate/list/1.html";
+		}
 	
 }

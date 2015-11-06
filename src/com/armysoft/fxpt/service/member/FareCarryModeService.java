@@ -48,7 +48,7 @@ public class FareCarryModeService extends BaseDao {
 		  for(Enumeration e=paraNames;e.hasMoreElements();){
 		         String thisName=e.nextElement().toString();
 		         if(thisName.startsWith(carryString+"Region")){
-		        	 String index=thisName.substring(thisName.indexOf(carryString+"Region"));
+		        	 String index=thisName.replace(carryString+"Region", "");
 		        	 String tempRegion=request.getParameter(thisName).toString();
 		        	 Float tempMailFirst=Float.parseFloat(request.getParameter(carryString+"First"+index).toString());
 		        	 Float tempMailSecond=Float.parseFloat(request.getParameter(carryString+"Second"+index).toString());
